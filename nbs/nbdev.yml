@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "monotonic-nn"
+  site-url: "https://airtai.github.io/monotonic-nn"
+  description: "Monotonic Neural Networks"
+  repo-branch: main
+  repo-url: "https://github.com/airtai/monotonic-nn"

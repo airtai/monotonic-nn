@@ -1,0 +1,4 @@
+{sidebar}
+- API
+{api}
+- [Releases]{changelog}

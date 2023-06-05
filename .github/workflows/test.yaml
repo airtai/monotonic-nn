@@ -1,0 +1,39 @@
+name: CI
+on: [workflow_dispatch, pull_request, push]
+
+jobs:
+  mypy_static_analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: airtai/workflows/airt-mypy-check@main
+  bandit_static_analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: airtai/workflows/airt-bandit-check@main
+  semgrep_static_analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: airtai/workflows/airt-semgrep-check@main        
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os:  [ubuntu, macos]
+        version: ["3.8", "3.9", "3.10", "3.11"]
+    runs-on: ${{ matrix.os }}-latest
+    steps:
+      - uses: fastai/workflows/nbdev-ci@master
+        with:
+          version: ${{ matrix.version }}
+          pre: 1
+      - name: test docs build
+        run: |
+          nbdev_docs
+          if [ -f "_docs/index.html" ]; then
+            echo "docs built successfully."
+          else
+            echo "index page not found in rendered docs."
+            ls -la
+            ls -la _docs
+            exit 1
+          fi
