@@ -1,2 +1,0 @@
-[nbdev]
-airt = airt._modidx:d
