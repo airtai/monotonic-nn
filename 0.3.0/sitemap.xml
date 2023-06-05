@@ -6,6 +6,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://monotonic.airt.ai/0.3.0/CHANGELOG/</loc>
+         <lastmod>2023-06-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://monotonic.airt.ai/0.3.0/Experiments/</loc>
          <lastmod>2023-06-05</lastmod>
          <changefreq>daily</changefreq>
@@ -32,11 +37,6 @@
     </url>
     <url>
          <loc>https://monotonic.airt.ai/0.3.0/MonoDenseLayer/</loc>
-         <lastmod>2023-06-05</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://monotonic.airt.ai/0.3.0/changelog_not_found/</loc>
          <lastmod>2023-06-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
