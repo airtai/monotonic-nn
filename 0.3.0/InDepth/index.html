@@ -1,0 +1,1439 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Monotonic Neural Networks implemented in Keras">
+      
+      
+        <meta name="author" content="AIRT Technologies d.o.o.">
+      
+      
+        <link rel="canonical" href="https://monotonic.airt.ai/0.3.0/InDepth/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../experiments/AutoMPG/">
+      
+      <link rel="icon" href="../overrides/images/airt_icon_blue.svg">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.15">
+    
+    
+      
+        <title>In-depth explanation - Monotonic Neural Networks</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.26e3688c.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ecc896b0.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../overrides/css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  
+  
+    
+  
+  
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Monotonic Neural Networks - In-depth explanation" />
+  <meta property="og:description" content="Monotonic Neural Networks implemented in Keras" />
+  <meta property="og:url" content="https://monotonic.airt.ai/0.3.0/InDepth/" />
+  <meta property="og:image" content="https://opengraph.githubassets.com/1685090413.786694/airtai/monotonic-nn" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Monotonic Neural Networks - In-depth explanation" />
+  <meta name="twitter:description" content="Monotonic Neural Networks implemented in Keras" />
+  <meta name="twitter:image" content="https://opengraph.githubassets.com/1685090413.786694/airtai/monotonic-nn" />
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="light-blue">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#in-depth-explanation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+          <aside class="md-banner md-banner--warning">
+            <div class="md-banner__inner md-grid md-typeset">
+              
+  You're not viewing the latest version.
+  <!-- nosemgrep -->
+  <a href="../.."> 
+    <strong>Click here to go to latest.</strong>
+  </a>
+
+            </div>
+            <script>var el=document.querySelector("[data-md-component=outdated]"),outdated=__md_get("__outdated",sessionStorage);!0===outdated&&el&&(el.hidden=!1)</script>
+          </aside>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Monotonic Neural Networks" class="md-header__button md-logo" aria-label="Monotonic Neural Networks" data-md-component="logo">
+      
+  <img src="../overrides/images/airt_icon_blue.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Monotonic Neural Networks
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              In-depth explanation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="light-blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+            
+              <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+              </label>
+            
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+            
+              <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+              </label>
+            
+          
+        </form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/airtai/monotonic-nn" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    monotonic-nn
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Monotonic Neural Networks" class="md-nav__button md-logo" aria-label="Monotonic Neural Networks" data-md-component="logo">
+      
+  <img src="../overrides/images/airt_icon_blue.svg" alt="logo">
+
+    </a>
+    Monotonic Neural Networks
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/airtai/monotonic-nn" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    monotonic-nn
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Tutorial
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          In-depth explanation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        In-depth explanation
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem" class="md-nav__link">
+    The problem
+  </a>
+  
+    <nav class="md-nav" aria-label="The problem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#actvation-functions" class="md-nav__link">
+    Actvation Functions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monotonicity-indicator" class="md-nav__link">
+    Monotonicity indicator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monotonic-dense-layer" class="md-nav__link">
+    Monotonic Dense Layer
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-types" class="md-nav__link">
+    Architecture types
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#type-1-architecture" class="md-nav__link">
+    Type-1 architecture
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#type-2-architecture" class="md-nav__link">
+    Type-2 architecture
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          Experiments
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Experiments
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../experiments/AutoMPG/" class="md-nav__link">
+        Auto MPG
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../experiments/Heart/" class="md-nav__link">
+        Heart disease
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../experiments/Compas/" class="md-nav__link">
+        COMPAS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../experiments/Blog/" class="md-nav__link">
+        Blog
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../experiments/Loan/" class="md-nav__link">
+        Loan
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../License/" class="md-nav__link">
+        License
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          API
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          API
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+          airt
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          airt
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_1" >
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_1" id="__nav_5_1_1_label" tabindex="0">
+          keras
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          keras
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_1_1" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_1_1" id="__nav_5_1_1_1_label" tabindex="0">
+          experiments
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_5_1_1_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_1_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          experiments
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/airt/keras/experiments/TestHyperModel/" class="md-nav__link">
+        TestHyperModel
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/airt/keras/experiments/create_tuner_stats/" class="md-nav__link">
+        create_tuner_stats
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/airt/keras/experiments/df2ds/" class="md-nav__link">
+        df2ds
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/airt/keras/experiments/find_hyperparameters/" class="md-nav__link">
+        find_hyperparameters
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/airt/keras/experiments/get_train_n_test_data/" class="md-nav__link">
+        get_train_n_test_data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/airt/keras/experiments/peek/" class="md-nav__link">
+        peek
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_1_2" >
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_1_2" id="__nav_5_1_1_2_label" tabindex="0">
+          layers
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_5_1_1_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_1_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          layers
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/airt/keras/layers/MonoDense/" class="md-nav__link">
+        MonoDense
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog_not_found/" class="md-nav__link">
+        Releases
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem" class="md-nav__link">
+    The problem
+  </a>
+  
+    <nav class="md-nav" aria-label="The problem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#actvation-functions" class="md-nav__link">
+    Actvation Functions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monotonicity-indicator" class="md-nav__link">
+    Monotonicity indicator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monotonic-dense-layer" class="md-nav__link">
+    Monotonic Dense Layer
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-types" class="md-nav__link">
+    Architecture types
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#type-1-architecture" class="md-nav__link">
+    Type-1 architecture
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#type-2-architecture" class="md-nav__link">
+    Type-2 architecture
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="in-depth-explanation">In-depth explanation<a class="headerlink" href="#in-depth-explanation" title="Permanent link">¤</a></h1>
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">¤</a></h2>
+<p>The simplest method to achieve monotonicity by construc- tion is to
+constrain the weights of the fully connected neural network to have only
+non-negative (for non-decreasing vari- ables) or only non-positive
+values (for non-ascending) vari- ables when used in conjunction with a
+monotonic activation function, a technique known for 30 years (Archer &amp;
+Wang, 1993). When used in conjunction with saturated (bounded)
+activation functions such as the sigmoid and hyperbolic tan- gent, these
+models are difficult to train, i.e. they do not converge to a good
+solution. On the other hand, when used with non-saturated (unbounded)
+convex activation functions such as ReLU (Nair &amp; Hinton, 2010), the
+resulting models are always convex (Liu et al., 2020), severely limiting
+the applicability of the method in practice.</p>
+<p>Our main contribution is a modification of the method above which, in
+conjunction with non-saturated activation func- tions, is capable of
+approximating non-convex functions as well: when the original activation
+function is used with additional two monotonic activation functions
+constructed from it in a neural network with constrained weights, it can
+approximate any monotone continuous functions. The resulting model is
+guaranteed to be monotonic, can be used in conjunction with popular
+convex monotonic non- saturated activation function, doesn’t have any
+additional parameters compared to a non-monotonic fully-connected
+network for the same task, and can be trained without any additional
+requirements on the learning procedure. Experi- mental results show it
+is exceeding the performance of all other state-of-the-art methods, all
+while being both simpler (in the number of parameters) and easier to
+train. Our contributions can be summarized as follows:</p>
+<ol>
+<li>
+<p>A modification to an existing constrained neural net- work layer
+    enabling it to model arbitrary monotonic function when used with
+    non-saturated monotone con- vex activation functions such as ReLU,
+    ELU, SELU, and alike.</p>
+</li>
+<li>
+<p>Experimental comparisons with other recent works showing that the
+    proposed architecture can yield equal or better results than the
+    previous state-of-the-art and with significantly fewer parameters.</p>
+</li>
+<li>
+<p>A proof showing that the proposed architecture can approximate any
+    monotone continuous function on a compact subset of Rn for a large
+    class of non-saturated activation functions.</p>
+</li>
+</ol>
+<h2 id="the-problem">The problem<a class="headerlink" href="#the-problem" title="Permanent link">¤</a></h2>
+<p>Most of the commonly used activation functions such as ReLU, ELU, SELU,
+etc. are monotonically increasing zero-centred, convex, lower-bounded
+non-polynomial functions. When used in a fully-connected, feed-forward
+neural network with at least one hidden layer and with unconstrained
+weights, they can approximate any continuous function on a compact
+subset. The simplest way to construct a monotonic neural network is to
+constrain its weights when used in conjunction with a monotone
+activation function. However, when the activation function is convex as
+well, the constrained neural network is not able to approximate
+non-convex functions.</p>
+<p>To better illustrate this, and to propose a simple solution in this
+particular example, we refer the readers to plots below where the goal
+is to approximate the simple cubic function <span class="arithmatex">\(x^3\)</span> using a neural network
+with a single hidden layer with either <span class="arithmatex">\(2\)</span> or <span class="arithmatex">\(32\)</span> neurons and with ReLU
+activation. A cubic function is apt for our illustration since it is
+concave in the considered interval <span class="arithmatex">\([-1, 0]\)</span> and convex in the interval
+<span class="arithmatex">\([0, 1]\)</span>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># # | hide</span>
+
+<span class="c1"># kind = &quot;Unconstrained ReLU&quot;</span>
+<span class="c1"># units = 2</span>
+<span class="c1"># model = create_model(kind, units=units)</span>
+<span class="c1"># model.summary()</span>
+<span class="c1"># train_model(model, lr=0.3)</span>
+<span class="c1"># models[(kind, units)] = model</span>
+</code></pre></div>
+<table>
+<tr>
+<td style="width:60%">
+<img src="images/nbs/../../../images/nbs/images/Unconstrained_ReLU.png" alt="Unconstrained_ReLU"/>
+</td>
+<td style="vertical-align:middle">
+
+The plot to the left shows two fully-connected neural networks with one
+hidden layer with 2 and 32 neurons and ReLU activations approximating
+the qubic function on the interval \[-1, 1\].
+
+An unconstrained ReLU network with n neurons can approximate both
+concave and convex segments of the cubic function using at most n + 1
+piecewise linear segments. Increasing the number of neurons will pro-
+vide a better fit with the function being approximated. Notice that even
+though the cubic function is mono- tone, there is no guarantee that the
+trained model will be monotone as well.
+
+</td>
+</tr>
+<tr>
+<td>
+
+<img src="images/nbs/../../../images/nbs/images/Unconstrained_ReLU.png" alt="Contrained_ReLU"/>
+
+</td>
+<td style="vertical-align:middle">
+
+If we constrain the weights of the network to be non- negative while
+still employing ReLU activation, the resulting model is monotone and
+convex. We can no longer approximate non-convex segments such as the
+cubic function on \[−1, 0\] in the figure, and increasing the number of
+neurons from 2 to 32 does not yield any significant improvement in the
+approximation.
+
+</td>
+</tr>
+<tr>
+<td>
+
+<img src="images/nbs/../../../images/nbs/images/Contrained_with_ReLU-based_activations.png"/>
+
+</td>
+<td style="vertical-align:middle">
+
+Our proposed solution uses a combination of three activation functions
+in the hidden layer in order to gain the ability to model non-convex,
+monotone continuous functions. Notice that increasing the number of neu-
+rons increases the number of piecewise linear segments to approximate
+the cubic function. The resulting net- work is monotone by construction
+even when trained on noisy data.
+
+</td>
+</tr>
+</table>
+
+<h3 id="actvation-functions">Actvation Functions<a class="headerlink" href="#actvation-functions" title="Permanent link">¤</a></h3>
+<p>Our construction is based on generating two additional activation
+functions from a typical non-saturated activation function such as ReLU,
+ELU and SELU.</p>
+<p>We use <span class="arithmatex">\(\breve{\mathcal{A}}\)</span> to denote the set of all zero-centred,
+monotonically increasing, convex, lower-bounded functions. Let
+<span class="arithmatex">\(\breve{\rho} \in \breve{\mathcal{A}}\)</span>. Then</p>
+<div class="arithmatex">\[
+\hat{\rho}(x) = -\breve{\rho}(-x)
+\]</div>
+<div class="arithmatex">\[
+\tilde{\rho}(x) = \begin{cases}
+      \breve{\rho}(x+1)-\breve{\rho}(1) &amp; \text{if }x &lt; 0\\
+      \hat{\rho}(x-1)+\breve{\rho}(1) &amp; \text{otherwise}
+    \end{cases} 
+\]</div>
+<p>An example of such activation functions are given in figures below:</p>
+<p><img alt="ReLU-based_activations" src="../images/nbs/images/ReLU-based_activations.png" />
+<img alt="ELU-based_activations" src="../images/nbs/images/ELU-based_activations.png" /></p>
+<h3 id="monotonicity-indicator">Monotonicity indicator<a class="headerlink" href="#monotonicity-indicator" title="Permanent link">¤</a></h3>
+<p>Our construction is preconditioned on a priori knowledge of (partial)
+monotonicity of a multivariate, multidimensional function <span class="arithmatex">\(f\)</span>. Let
+<span class="arithmatex">\(f: K \mapsto \mathbb{R}^m\)</span> be defined on a compact segment
+<span class="arithmatex">\(K \subseteq \mathbb{R}^n\)</span>. Then we define its <span class="arithmatex">\(n\)</span>-dimensional
+<em>monotonicity indicator vector</em> <span class="arithmatex">\(\mathbf{t} = [t_1, \dots, t_n]\)</span>
+element-wise as follows:</p>
+<div class="arithmatex">\[
+    t_j= \begin{cases}
+      1 &amp; \text{if }\cfrac{\partial f(\mathbf{x})_i} {\partial x_j} \geq 0 \ 
+    \text{ for each } i \in \{1, \dots , m\}\\
+      -1 &amp; \text{if }\cfrac{\partial f(\mathbf{x})_i} {\partial x_j} \leq 0 \ 
+    \text{ for each } i \in \{1, \dots , m\}\\
+      0 &amp; \text{otherwise}
+    \end{cases} 
+    \: 
+\]</div>
+<p>Given an <span class="arithmatex">\((m \times n)\)</span>-dimensional matrix <span class="arithmatex">\(\mathbf{M}\)</span> and
+<span class="arithmatex">\(n\)</span>-dimensional monotonicity indicator vector <span class="arithmatex">\(\mathbf{t}\)</span>, we define
+the operation <span class="arithmatex">\(|.|_{t}\)</span> assigning an <span class="arithmatex">\((m \times n)\)</span>-dimensional matrix
+<span class="arithmatex">\(\mathbf{M'} = |\mathbf{M}|_{t}\)</span> to <span class="arithmatex">\(\mathbf{M}\)</span> element-wise as
+follows:</p>
+<div class="arithmatex">\[
+    m'_{j,i}= \begin{cases}
+      |m_{j,i}| &amp; \text{if }t_i=1\\
+      -|m_{j,i}| &amp; \text{if }t_i=-1\\
+      m_{j,i} &amp; \text{otherwise}
+    \end{cases}
+\]</div>
+<p>Below is an example of a kernel <span class="arithmatex">\(W\in \mathbb{R}^{9 × 12}\)</span> with 12 units
+and 9 inputs before and after applying the monotonicity indicator
+<span class="arithmatex">\(t =(-1, -1, -1, 0, 0, 0, 1, 1, 1)\)</span>:</p>
+<p><img alt="original kernel" src="../images/nbs/images/kernel__W__in__mathbb_R___9_x_12__.png" />
+<img alt="replaced
+kernel" src="../images/nbs/images/kernel__%28%7CW_T%7C_t%29_T__after_applying_monotonicity_indicator__t%3D%28-1%2C_-1%2C_-1%2C_0%2C_0%2C_0%2C_1%2C_1%2C_1%29_.png" /></p>
+<h3 id="monotonic-dense-layer">Monotonic Dense Layer<a class="headerlink" href="#monotonic-dense-layer" title="Permanent link">¤</a></h3>
+<p>Monotonic Dense Unit
+(<a href="https://airtai.github.io/monotonic-nn/0.3.0/api/airt/keras/layers/MonoDense/#airt.keras.layers.MonoDense"><code>MonoDense</code></a>
+class) uses weight constrains and activation functions constructed as
+explained above to construct partially monotonic neural networks. The
+below is the figure from the paper for reference.</p>
+<p>In the constructor of
+<a href="https://airtai.github.io/monotonic-nn/0.3.0/api/airt/keras/layers/MonoDense/#airt.keras.layers.MonoDense"><code>MonoDense</code></a>
+class:</p>
+<ul>
+<li>
+<p>the parameter <code>monotonicity_indicator</code> corresponds to <strong>t</strong> in the
+  figure below, and</p>
+</li>
+<li>
+<p>parameters <code>is_convex</code>, <code>is_concave</code> and <code>activation_weights</code> are used
+  to calculate the activation selector <strong>s</strong> as follows:</p>
+</li>
+<li>
+<p>if <code>is_convex</code> or <code>is_concave</code> is <strong>True</strong>, then the activation
+    selector <strong>s</strong> will be (<code>units</code>, 0, 0) and (0, <code>units</code>, 0),
+    respecively.</p>
+</li>
+<li>
+<p>if both <code>is_convex</code> or <code>is_concave</code> is <strong>False</strong>, then the
+    <code>activation_weights</code> represent ratios between <span class="arithmatex">\(\breve{s}\)</span>, <span class="arithmatex">\(\hat{s}\)</span>
+    and <span class="arithmatex">\(\tilde{s}\)</span>, respecively. E.g. if
+    <code>activation_weights = (2, 2, 1)</code> and <code>units = 10</code>, then</p>
+</li>
+</ul>
+<div class="arithmatex">\[
+(\breve{s}, \hat{s}, \tilde{s}) = (4, 4, 2)
+\]</div>
+<p><img alt="mono-dense-layer-diagram.png" src="../images/nbs/images/mono-dense-layer-diagram.png" /></p>
+<p>Bellow is an example of a batched input to <code>MoneDense</code> layer with batch
+size 9 and 12 inputs features.</p>
+<p><img alt="" src="images/nbs/images/input__x__in__mathbb_R___9_×_12___with_batch_size_9_and_12_inputs.png" /></p>
+<p>The figure below is an example of a kernel with 18 units and 12 input
+features.</p>
+<p><img alt="kernel" src="../images/nbs/images/kernel__%28%7CW_T%7C_t%29_T__in__mathbb_R___12_x_18___after_applying__t%3D%5B1%2C_1%2C_1%2C_1%2C_0%2C_0%2C_0%2C_0%2C_-1%2C_-1%2C_-1%2C_-1%5D__in__mathbb_R___12__.png" /></p>
+<p>The input <span class="arithmatex">\(x\)</span> is multiplied with kernel
+<span class="arithmatex">\((|W^T|_t)^T \in \mathbb{R}^{12 × 18}\)</span> after applying monotonicity
+indicator <span class="arithmatex">\(t \in \mathbb{R}^{12}\)</span> to it and then the bias <span class="arithmatex">\(b\)</span> (initially
+set to 0) is added to it:</p>
+<p><img alt="output" src="../images/nbs/images/batched_output__y__in__mathbb_R___9_x_18__.png" /></p>
+<h2 id="architecture-types">Architecture types<a class="headerlink" href="#architecture-types" title="Permanent link">¤</a></h2>
+<p>The main advantage of our proposed monotonic dense unit is its
+simplicity. We can build deep neural nets with different architectures
+by plugging in our monotonic dense blocks. We have two functions for
+building neural networks using
+<a href="https://airtai.github.io/monotonic-nn/0.3.0/api/airt/keras/layers/MonoDense/#airt.keras.layers.MonoDense"><code>MonoDense</code></a>
+layer.</p>
+<h3 id="type-1-architecture">Type-1 architecture<a class="headerlink" href="#type-1-architecture" title="Permanent link">¤</a></h3>
+<p>The first example shown in the figure below corresponds to the standard
+MLP type of neural network architecture used in general, where each of
+the input features is concatenated to form one single input feature
+vector <span class="arithmatex">\(\mathbf{x}\)</span> and fed into the network, with the only difference
+being that instead of standard fully connected or dense layers, we
+employ monotonic dense units throughout. For the first (or input layer)
+layer, the indicator vector <span class="arithmatex">\(\mathbf{t}\)</span>, is used to identify the
+monotonicity property of the input feature with respect to the output.
+Specifically, <span class="arithmatex">\(\mathbf{t}\)</span> is set to <span class="arithmatex">\(1\)</span> for those components in the
+input feature vector that are monotonically increasing and is set to
+<span class="arithmatex">\(-1\)</span> for those components that are monotonically decreasing and set to
+<span class="arithmatex">\(0\)</span> if the feature is non-monotonic. For the subsequent hidden layers,
+monotonic dense units with the indicator vector <span class="arithmatex">\(\mathbf{t}\)</span> always
+being set to <span class="arithmatex">\(1\)</span> are used in order to preserve monotonicity. Finally,
+depending on whether the problem at hand is a regression problem or a
+classification problem (or even a multi-task problem), an appropriate
+activation function (such as linear activation or sigmoid or softmax) to
+obtain the final output.</p>
+<p><img alt="type-1" src="../images/nbs/images/type-1.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">Input</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,))</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="s2">&quot;abcd&quot;</span><span class="p">)}</span>
+
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">MonoDense</span><span class="o">.</span><span class="n">create_type_1</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span>
+    <span class="n">units</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>
+    <span class="n">final_units</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;elu&quot;</span><span class="p">,</span>
+    <span class="n">n_layers</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">final_activation</span><span class="o">=</span><span class="s2">&quot;softmax&quot;</span><span class="p">,</span>
+    <span class="n">monotonicity_indicator</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">dropout</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">outputs</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Model: &quot;model_6&quot;
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ a (InputLayer)                 [(None, 1)]          0           []
+
+ b (InputLayer)                 [(None, 1)]          0           []
+
+ c (InputLayer)                 [(None, 1)]          0           []
+
+ d (InputLayer)                 [(None, 1)]          0           []
+
+ concatenate (Concatenate)      (None, 4)            0           [&#39;a[0][0]&#39;,                      
+                                                                  &#39;b[0][0]&#39;,                      
+                                                                  &#39;c[0][0]&#39;,                      
+                                                                  &#39;d[0][0]&#39;]
+
+ mono_dense_0 (MonoDense)       (None, 64)           320         [&#39;concatenate[0][0]&#39;]
+
+ dropout (Dropout)              (None, 64)           0           [&#39;mono_dense_0[0][0]&#39;]
+
+ mono_dense_1_increasing (MonoD  (None, 64)          4160        [&#39;dropout[0][0]&#39;]                
+ ense)
+
+ dropout_1 (Dropout)            (None, 64)           0           [&#39;mono_dense_1_increasing[0][0]&#39;]
+
+ mono_dense_2_increasing (MonoD  (None, 10)          650         [&#39;dropout_1[0][0]&#39;]              
+ ense)
+
+ tf.nn.softmax (TFOpLambda)     (None, 10)           0           [&#39;mono_dense_2_increasing[0][0]&#39;]
+
+==================================================================================================
+Total params: 5,130
+Trainable params: 5,130
+Non-trainable params: 0
+__________________________________________________________________________________________________
+</code></pre></div>
+<h3 id="type-2-architecture">Type-2 architecture<a class="headerlink" href="#type-2-architecture" title="Permanent link">¤</a></h3>
+<p>The figure below shows another example of a neural network architecture
+that can be built employing proposed monotonic dense blocks. The
+difference when compared to the architecture described above lies in the
+way input features are fed into the hidden layers of neural network
+architecture. Instead of concatenating the features directly, this
+architecture provides flexibility to employ any form of complex feature
+extractors for the non-monotonic features and use the extracted feature
+vectors as inputs. Another difference is that each monotonic input is
+passed through separate monotonic dense units. This provides an
+advantage since depending on whether the input is completely concave or
+convex or both, we can adjust the activation selection vector
+<span class="arithmatex">\(\mathbf{s}\)</span> appropriately along with an appropriate value for the
+indicator vector <span class="arithmatex">\(\mathbf{t}\)</span>. Thus, each of the monotonic input
+features has a separate monotonic dense layer associated with it. Thus
+as the major difference to the above-mentioned architecture, we
+concatenate the feature vectors instead of concatenating the inputs
+directly. The subsequent parts of the network are similar to the
+architecture described above wherein for the rest of the hidden
+monotonic dense units, the indicator vector <span class="arithmatex">\(\mathbf{t}\)</span> is always set
+to <span class="arithmatex">\(1\)</span> to preserve monotonicity.</p>
+<p><img alt="type-2" src="../images/nbs/images/type-2.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">Input</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,))</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="s2">&quot;abcd&quot;</span><span class="p">)}</span>
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">MonoDense</span><span class="o">.</span><span class="n">create_type_2</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="p">,</span>
+    <span class="n">units</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+    <span class="n">final_units</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;elu&quot;</span><span class="p">,</span>
+    <span class="n">final_activation</span><span class="o">=</span><span class="s2">&quot;softmax&quot;</span><span class="p">,</span>
+    <span class="n">n_layers</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">dropout</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+    <span class="n">monotonicity_indicator</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">is_convex</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">outputs</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Model: &quot;model_7&quot;
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ a (InputLayer)                 [(None, 1)]          0           []
+
+ b (InputLayer)                 [(None, 1)]          0           []
+
+ c (InputLayer)                 [(None, 1)]          0           []
+
+ d (InputLayer)                 [(None, 1)]          0           []
+
+ mono_dense_a_increasing_convex  (None, 8)           16          [&#39;a[0][0]&#39;]                      
+  (MonoDense)
+
+ dense_b (Dense)                (None, 8)            16          [&#39;b[0][0]&#39;]
+
+ mono_dense_c_decreasing (MonoD  (None, 8)           16          [&#39;c[0][0]&#39;]                      
+ ense)
+
+ dense_d (Dense)                (None, 8)            16          [&#39;d[0][0]&#39;]
+
+ preprocessed_features (Concate  (None, 32)          0           [&#39;mono_dense_a_increasing_convex[
+ nate)                                                           0][0]&#39;,                          
+                                                                  &#39;dense_b[0][0]&#39;,                
+                                                                  &#39;mono_dense_c_decreasing[0][0]&#39;,
+                                                                  &#39;dense_d[0][0]&#39;]
+
+ mono_dense_0_convex (MonoDense  (None, 32)          1056        [&#39;preprocessed_features[0][0]&#39;]  
+ )
+
+ dropout_2 (Dropout)            (None, 32)           0           [&#39;mono_dense_0_convex[0][0]&#39;]
+
+ mono_dense_1_increasing_convex  (None, 32)          1056        [&#39;dropout_2[0][0]&#39;]              
+  (MonoDense)
+
+ dropout_3 (Dropout)            (None, 32)           0           [&#39;mono_dense_1_increasing_convex[
+                                                                 0][0]&#39;]
+
+ mono_dense_2_increasing_convex  (None, 10)          330         [&#39;dropout_3[0][0]&#39;]              
+  (MonoDense)
+
+ tf.nn.softmax_1 (TFOpLambda)   (None, 10)           0           [&#39;mono_dense_2_increasing_convex[
+                                                                 0][0]&#39;]
+
+==================================================================================================
+Total params: 2,506
+Trainable params: 2,506
+Non-trainable params: 0
+__________________________________________________________________________________________________
+</code></pre></div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      2022 onwards, AIRT Technologies d.o.o.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+    and 
+    <a href="https://nbdev-mkdocs.airt.ai/" target="_blank" rel="noopener">
+      Material for nbdev
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.indexes", "navigation.top", "search.suggest", "search.highlight", "search.share", "content.code.copy"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.b4d07000.min.js"></script>
+      
+        <script src="../overrides/js/extra.js"></script>
+      
+        <script src="../overrides/js/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

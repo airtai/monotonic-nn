@@ -1,0 +1,77 @@
+.md-typeset .admonition.caution,
+.md-typeset details.caution {
+  border-color: #ff9100;
+}
+.md-typeset .caution > .admonition-title,
+.md-typeset .caution > summary {
+  background-color: #ff91001a;
+}
+.md-typeset .caution > .admonition-title::before,
+.md-typeset .caution > summary::before {
+  background-color: #ff9100;
+  -webkit-mask-image: var(--md-admonition-icon--warning);
+          mask-image: var(--md-admonition-icon--warning);
+}
+
+.md-typeset .admonition.important,
+.md-typeset details.important {
+  border-color: #ff1744;
+}
+.md-typeset .important > .admonition-title,
+.md-typeset .important > summary {
+  background-color: #ff17441a;
+}
+.md-typeset .important > .admonition-title::before,
+.md-typeset .important > summary::before {
+  background-color: #ff1744;
+  -webkit-mask-image: var(--md-admonition-icon--danger);
+          mask-image: var(--md-admonition-icon--danger);
+}
+
+.md-sidebar.md-sidebar--secondary nav.md-nav.md-nav--secondary > ul > li + li > a {
+	padding-left: 1rem;
+}
+
+.doc.doc-object.doc-class + .doc.doc-object.doc-function h4 {
+	font-size: 0.85em;
+}
+
+.doc.doc-object.doc-function + .doc.doc-object.doc-function h4 {
+	font-size: 0.85em;
+}
+
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color:        #003257;
+  --md-primary-fg-color--light: #004171;
+  --md-primary-fg-color--dark:  #00233d;
+}
+.md-header nav .md-header__title {
+    margin-left:0;
+}
+.md-typeset a, .md-nav__item .md-nav__link--active, .md-typeset a:hover, .md-nav__link:focus, .md-nav__link:hover, html .md-footer-meta.md-typeset a, html .md-footer-meta.md-typeset a:hover {
+    color: #56b7e1;
+}
+.md-typeset a:hover, html .md-footer-meta.md-typeset a:hover {
+    text-decoration: underline;
+}
+
+.md-footer-meta {
+    background-color: #003257;
+}
+
+.md-header__button.md-logo img, .md-header__button.md-logo svg {
+    height: 1rem;
+}
+
+@media screen and (max-width: 76.1875em) {
+    .md-nav--primary .md-nav__item--active>.md-nav__link {
+        color: #56b7e1;
+    }
+}
+
+[data-md-color-scheme="slate"] {
+  --md-hue: 210; 
+  --md-primary-fg-color:        #003257;
+  --md-primary-fg-color--light: #004171;
+  --md-primary-fg-color--dark:  #00233d;
+}
