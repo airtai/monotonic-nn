@@ -29,9 +29,12 @@ min_python = cfg['min_python']
 lic = licenses.get(cfg['license'].lower(), (cfg['license'], None))
 
 requirements = ["tensorflow>=2.10.0"]
-    
+
+experiments_requirements = [
+    "keras-tuner[bayesian]==1.3.5"
+]
+
 dev_requirements = [
-    "keras-tuner[bayesian]==1.3.5",
     "nbdev_mkdocs==0.5.1",
     "pytest==7.3.1",
     "pandas>=1.3.5",
@@ -49,8 +52,8 @@ dev_requirements = [
 project_urls = {
    'Bug Tracker': cfg['git_url'] + '/issues',
    'CI': cfg['git_url'] + '/actions',
-   'Documentation': 'https://mono-dense-keras.airt.ai/',
-#    'Tutorial': 'https://colab.research.google.com/github/airtai/fastkafka/blob/main/nbs/guides/Guide_00_FastKafka_Demo.ipynb'
+   'Documentation': 'https://monotonic.airt.ai/',
+   'Tutorial': 'https://colab.research.google.com/github/airtai/monotonic-nn/blob/main/nbs/index.ipynb'
 }
 
 setuptools.setup(
@@ -66,7 +69,7 @@ setuptools.setup(
     packages = setuptools.find_packages(),
     include_package_data = True,
     install_requires = requirements,
-    extras_require={ 'dev': dev_requirements },
+    extras_require={ 'dev': dev_requirements + experiments_requirements, "experiments": experiments_requirements },
     dependency_links = cfg.get('dep_links','').split(),
     python_requires  = '>=' + cfg['min_python'],
     long_description = open('README.md').read(),
