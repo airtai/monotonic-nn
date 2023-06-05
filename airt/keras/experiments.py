@@ -35,7 +35,7 @@ from tensorflow.keras.optimizers.experimental import AdamW
 from tensorflow.types.experimental import TensorLike
 from tqdm import tqdm
 
-from .layers import MonoDense, create_type_1, create_type_2
+from .layers import MonoDense
 
 # %% ../../nbs/Experiments.ipynb 7
 class _DownloadProgressBar(tqdm):
@@ -159,7 +159,7 @@ def _build_mono_model_f(
     decay_rate: float,
 ) -> Model:
     inputs = {k: Input(name=k, shape=(1,)) for k in monotonicity_indicator.keys()}
-    outputs = create_type_2(
+    outputs = MonoDense.create_type_2(
         inputs,
         units=units,
         final_units=1,
