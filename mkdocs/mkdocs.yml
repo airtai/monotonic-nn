@@ -103,4 +103,7 @@ extra_javascript:
 extra:
   version:
     provider: mike
+  analytics:
+    provider: google
+    property: G-F7V44YPJHR
   social_image: "https://opengraph.githubassets.com/1685090413.786694/airtai/monotonic-nn"
