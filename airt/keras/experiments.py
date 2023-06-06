@@ -225,7 +225,7 @@ def _get_build_model_with_hp_f(
     return build_model_with_hp_f
 
 
-class TestHyperModel(HyperModel):
+class _TestHyperModel(HyperModel):
     def __init__(self, **kwargs: Any):
         self.kwargs = kwargs
 
@@ -283,7 +283,7 @@ def find_hyperparameters(
     train_df, test_df = get_train_n_test_data(dataset_name)
     train_ds, test_ds = df2ds(train_df), df2ds(test_df)
 
-    oracle = TestHyperModel(
+    oracle = _TestHyperModel(
         monotonicity_indicator=monotonicity_indicator,
         hp_params_f=hp_params_f,
         final_activation=final_activation,

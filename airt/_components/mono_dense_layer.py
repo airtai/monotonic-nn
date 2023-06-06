@@ -197,7 +197,7 @@ class MonoDense(Dense):
     (\\breve{s}, \\hat{s}, \\tilde{s}) = (4, 4, 2)
     $$
 
-    ![mono-dense-layer-diagram.png](../../../images/nbs/images/mono-dense-layer-diagram.png)
+    ![mono-dense-layer-diagram.png](../../../../../images/nbs/images/mono-dense-layer-diagram.png)
 
     """
 
