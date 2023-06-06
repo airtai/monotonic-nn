@@ -1013,8 +1013,8 @@ train. Our contributions can be summarized as follows:</p>
 </li>
 <li>
 <p>A proof showing that the proposed architecture can approximate any
-    monotone continuous function on a compact subset of Rn for a large
-    class of non-saturated activation functions.</p>
+    monotone continuous function on a compact subset of <span class="arithmatex">\(\mathbb{R}^n\)</span>
+    for a large class of non-saturated activation functions.</p>
 </li>
 </ol>
 <h2 id="the-problem">The problem<a class="headerlink" href="#the-problem" title="Permanent link">¤</a></h2>
@@ -1044,14 +1044,14 @@ concave in the considered interval <span class="arithmatex">\([-1, 0]\)</span> a
 
 The plot to the left shows two fully-connected neural networks with one
 hidden layer with 2 and 32 neurons and ReLU activations approximating
-the qubic function on the interval \[-1, 1\].
+the qubic function on the interval $[-1, 1]$.
 
 An unconstrained ReLU network with n neurons can approximate both
-concave and convex segments of the cubic function using at most n + 1
-piecewise linear segments. Increasing the number of neurons will pro-
-vide a better fit with the function being approximated. Notice that even
-though the cubic function is mono- tone, there is no guarantee that the
-trained model will be monotone as well.
+concave and convex segments of the cubic function using at most $n + 1$
+piecewise linear segments. Increasing the number of neurons will provide
+a better fit with the function being approximated. Notice that even
+though the cubic function is monotonic, there is no guarantee that the
+trained model will be monotonic as well.
 
 </td>
 </tr>
@@ -1063,10 +1063,10 @@ trained model will be monotone as well.
 </td>
 <td style="vertical-align:middle">
 
-If we constrain the weights of the network to be non- negative while
+If we constrain the weights of the network to be non-negative while
 still employing ReLU activation, the resulting model is monotone and
 convex. We can no longer approximate non-convex segments such as the
-cubic function on \[−1, 0\] in the figure, and increasing the number of
+cubic function on $[−1, 0]$ in the figure, and increasing the number of
 neurons from 2 to 32 does not yield any significant improvement in the
 approximation.
 
@@ -1082,8 +1082,8 @@ approximation.
 
 Our proposed solution uses a combination of three activation functions
 in the hidden layer in order to gain the ability to model non-convex,
-monotone continuous functions. Notice that increasing the number of neu-
-rons increases the number of piecewise linear segments to approximate
+monotone continuous functions. Notice that increasing the number of
+neurons increases the number of piecewise linear segments to approximate
 the cubic function. The resulting net- work is monotone by construction
 even when trained on noisy data.
 
@@ -1139,6 +1139,27 @@ follows:</p>
       m_{j,i} &amp; \text{otherwise}
     \end{cases}
 \]</div>
+<div class="highlight"><pre><span></span><code><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">hsluv</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Defaulting to user installation because normal site-packages is not writeable
+Collecting hsluv
+  Downloading hsluv-5.0.3-py2.py3-none-any.whl (5.1 kB)
+Installing collected packages: hsluv
+Successfully installed hsluv-5.0.3
+
+[notice] A new release of pip is available: 23.0.1 -&gt; 23.1.2
+[notice] To update, run: python3 -m pip install --upgrade pip
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">hsluv</span> <span class="kn">import</span> <span class="n">hex_to_hsluv</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">hex_to_hsluv</span><span class="p">(</span><span class="n">colors</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>(233.30090815690622, 83.490901288401, 65.2310379720645)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">colors</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>[&#39;#E7338A&#39;, &#39;#48A8D8&#39;, &#39;#032545&#39;]
+</code></pre></div>
 <p>Below is an example of a kernel <span class="arithmatex">\(W\in \mathbb{R}^{9 × 12}\)</span> with 12 units
 and 9 inputs before and after applying the monotonicity indicator
 <span class="arithmatex">\(t =(-1, -1, -1, 0, 0, 0, 1, 1, 1)\)</span>:</p>
