@@ -58,7 +58,7 @@ If you use this library, please cite:
 ## Python package
 
 This package contains an implementation of our Monotonic Dense Layer
-[`MonoDense`](https://monotonic.airt.ai/0.3.0/api/airt/keras/layers/MonoDense/#airt.keras.layers.MonoDense)
+[`MonoDense`](https://monotonic.airt.ai/latest/api/airt/keras/layers/MonoDense/#airt.keras.layers.MonoDense)
 (Constrained Monotonic Fully Connected Layer). Below is the figure from
 the paper for reference.
 
@@ -80,7 +80,7 @@ $$
 (\breve{s}, \hat{s}, \tilde{s}) = (4, 4, 2)
 $$
 
-![mono-dense-layer-diagram](https://monotonic.airt.ai/0.3.0/api/airt/keras/layers/MonoDense/#airt.keras.layers.MonoDense)
+![mono-dense-layer-diagram](https://github.com/airtai/monotonic-nn/raw/main/nbs/images/mono-dense-layer-diagram.png)
 
 ### Install
 
@@ -97,8 +97,6 @@ formula before adding Gaussian noise to it:
 
 $y = x_1^3 + \sin\left(\frac{x_2}{2 \pi}\right) + e^{-x_3}$
 
-<style type="text/css">
-</style>
 <table id="T_37b51">
   <thead>
     <tr>
@@ -143,10 +141,10 @@ $y = x_1^3 + \sin\left(\frac{x_2}{2 \pi}\right) + e^{-x_3}$
 </table>
 
 Now, we’ll use the
-[`MonoDense`](https://airtai.github.io/monotonic-nn/monodenselayer.html#monodense)
+[`MonoDense`](https://monotonic.airt.ai/latest/api/airt/keras/layers/MonoDense/#airt.keras.layers.MonoDense)
 layer instead of `Dense` layer to build a simple monotonic network. By
 default, the
-[`MonoDense`](https://airtai.github.io/monotonic-nn/monodenselayer.html#monodense)
+[`MonoDense`](https://monotonic.airt.ai/latest/api/airt/keras/layers/MonoDense/#airt.keras.layers.MonoDense)
 layer assumes the output of the layer is monotonically increasing with
 all inputs. This assumtion is always true for all layers except possibly
 the first one. For the first layer, we use `monotonicity_indicator` to
