@@ -22,4 +22,5 @@ __all__ = ["MonoDense"]
 keras_package = "airt.keras.layers"
 
 # %% ../../../nbs/Layers.ipynb 8
-tf.keras.saving.register_keras_serializable(keras_package)(MonoDense)
+if f"{keras_package}>MonoDense" not in tf.keras.utils.get_custom_objects():
+    tf.keras.utils.register_keras_serializable(keras_package)(MonoDense)
