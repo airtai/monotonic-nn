@@ -12,7 +12,7 @@
         <meta name="author" content="AIRT Technologies d.o.o.">
       
       
-        <link rel="canonical" href="https://monotonic.airt.ai/0.3.0/Experiments/">
+        <link rel="canonical" href="https://monotonic.airt.ai/0.3/Experiments/">
       
       
       
@@ -75,7 +75,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Monotonic Neural Networks - Experiments" />
   <meta property="og:description" content="Monotonic Neural Networks implemented in Keras" />
-  <meta property="og:url" content="https://monotonic.airt.ai/0.3.0/Experiments/" />
+  <meta property="og:url" content="https://monotonic.airt.ai/0.3/Experiments/" />
   <meta property="og:image" content="https://opengraph.githubassets.com/1686060464.736638/airtai/monotonic-nn" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
@@ -1265,7 +1265,9 @@ target="_blank" style="float:right; font-size:smaller">source</a></p>
 </code></pre></div>
 </blockquote>
 <p>Search for optimal hyperparameters</p>
-<p>Args: monotonicity_indicator: monotonicity indicator as used in
+<p>Args: dataset_name: name of the dataset, one of “auto”, “heart”,
+compas”, “blog”, “loan” monotonicity_indicator: monotonicity indicator
+as used in
 <a href="https://airtai.github.io/monotonic-nn/monodenselayer.html#monodense.__init__"><code>MonoDense.__init__</code></a>
 final_activation: final activation of the neural network loss:
 Tensorflow loss function metrics: Tensorflow metrics function
@@ -1313,7 +1315,7 @@ INFO:tensorflow:Oracle triggered exit
 </code></pre></div>
 <hr />
 <p><a
-href="https://github.com/airtai/monotonic-nn/blob/main/airt/keras/experiments.py#L385"
+href="https://github.com/airtai/monotonic-nn/blob/main/airt/keras/experiments.py#L386"
 target="_blank" style="float:right; font-size:smaller">source</a></p>
 <h3 id="create_tuner_stats">create_tuner_stats<a class="headerlink" href="#create_tuner_stats" title="Permanent link">¤</a></h3>
 <blockquote>

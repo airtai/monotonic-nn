@@ -12,7 +12,7 @@
         <meta name="author" content="AIRT Technologies d.o.o.">
       
       
-        <link rel="canonical" href="https://monotonic.airt.ai/0.3.0/api/airt/keras/experiments/find_hyperparameters/">
+        <link rel="canonical" href="https://monotonic.airt.ai/0.3/api/airt/keras/experiments/find_hyperparameters/">
       
       
         <link rel="prev" href="../df2ds/">
@@ -79,7 +79,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Monotonic Neural Networks - find_hyperparameters" />
   <meta property="og:description" content="Monotonic Neural Networks implemented in Keras" />
-  <meta property="og:url" content="https://monotonic.airt.ai/0.3.0/api/airt/keras/experiments/find_hyperparameters/" />
+  <meta property="og:url" content="https://monotonic.airt.ai/0.3/api/airt/keras/experiments/find_hyperparameters/" />
   <meta property="og:image" content="https://opengraph.githubassets.com/1686060464.736638/airtai/monotonic-nn" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
@@ -877,6 +877,20 @@
     </thead>
     <tbody>
         <tr>
+          <td><code>dataset_name</code></td>
+          <td>
+                <code><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>name of the dataset, one of "auto", "heart", compas", "blog", "loan"</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
           <td><code>monotonicity_indicator</code></td>
           <td>
                 <code>Dict[<a class="autorefs autorefs-external" href="https://docs.python.org/3/library/stdtypes.html#str">str</a>, <a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#int">int</a>]</code>
@@ -1190,7 +1204,8 @@
 <span class="normal">313</span>
 <span class="normal">314</span>
 <span class="normal">315</span>
-<span class="normal">316</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">find_hyperparameters</span><span class="p">(</span>
+<span class="normal">316</span>
+<span class="normal">317</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">find_hyperparameters</span><span class="p">(</span>
     <span class="n">dataset_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">monotonicity_indicator</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
@@ -1212,6 +1227,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Search for optimal hyperparameters</span>
 
 <span class="sd">    Args:</span>
+<span class="sd">        dataset_name: name of the dataset, one of &quot;auto&quot;, &quot;heart&quot;, compas&quot;, &quot;blog&quot;, &quot;loan&quot;</span>
 <span class="sd">        monotonicity_indicator: monotonicity indicator as used in `MonoDense.__init__`</span>
 <span class="sd">        final_activation:  final activation of the neural network</span>
 <span class="sd">        loss: Tensorflow loss function</span>
