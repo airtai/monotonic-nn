@@ -22,5 +22,9 @@ __all__ = ["MonoDense"]
 keras_package = "airt.keras.layers"
 
 # %% ../../../nbs/Layers.ipynb 9
-if f"{keras_package}>MonoDense" not in tf.keras.utils.get_custom_objects():
-    tf.keras.utils.register_keras_serializable(keras_package)(MonoDense)
+if tf.keras.saving.get_registered_object(f"{keras_package}>MonoDense") == None:
+    try:
+        tf.keras.utils.register_keras_serializable(keras_package)(MonoDense)
+        raise ValueError("s")
+    except Exception as e:
+        print(f"Exception ignored: {e}")
