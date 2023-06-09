@@ -258,6 +258,7 @@ def find_hyperparameters(
     """Search for optimal hyperparameters
 
     Args:
+        dataset_name: name of the dataset, one of "auto", "heart", compas", "blog", "loan"
         monotonicity_indicator: monotonicity indicator as used in `MonoDense.__init__`
         final_activation:  final activation of the neural network
         loss: Tensorflow loss function

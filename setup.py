@@ -28,7 +28,7 @@ py_versions = '3.6 3.7 3.8 3.9 3.10 3.11'.split()
 min_python = cfg['min_python']
 lic = licenses.get(cfg['license'].lower(), (cfg['license'], None))
 
-requirements = ["tensorflow>=2.10.0"]
+requirements = ["tensorflow>=2.12.0"]
 
 experiments_requirements = [
     "keras-tuner[bayesian]==1.3.5"

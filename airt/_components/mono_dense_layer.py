@@ -179,6 +179,7 @@ def replace_kernel_using_monotonicity_indicator(
 
 # %% ../../nbs/MonoDenseLayer.ipynb 29
 @export
+@tf.keras.saving.register_keras_serializable("airt.keras.layers")
 class MonoDense(Dense):
     """Monotonic counterpart of the regular Dense Layer of tf.keras
 
@@ -251,16 +252,27 @@ class MonoDense(Dense):
 
         self.units = units
         self.org_activation = activation
-        self.activation_weights = activation_weights
         self.monotonicity_indicator = monotonicity_indicator
         self.is_convex = is_convex
         self.is_concave = is_concave
+        self.activation_weights = activation_weights
 
         (
             self.convex_activation,
             self.concave_activation,
             self.saturated_activation,
         ) = get_activation_functions(self.org_activation)
+
+    def get_config(self) -> Dict[str, Any]:
+        """Get config is used for saving the model"""
+        return dict(
+            units=self.units,
+            activation=self.org_activation,
+            monotonicity_indicator=self.monotonicity_indicator,
+            is_convex=self.is_convex,
+            is_concave=self.is_concave,
+            activation_weights=self.activation_weights,
+        )
 
     def build(self, input_shape: Tuple, *args: List[Any], **kwargs: Any) -> None:
         """Build
@@ -439,7 +451,7 @@ class MonoDense(Dense):
             dropout=dropout,
         )
 
-# %% ../../nbs/MonoDenseLayer.ipynb 33
+# %% ../../nbs/MonoDenseLayer.ipynb 34
 def _create_mono_block(
     *,
     units: List[int],
@@ -481,7 +493,7 @@ def _create_mono_block(
 
     return create_mono_block_inner
 
-# %% ../../nbs/MonoDenseLayer.ipynb 35
+# %% ../../nbs/MonoDenseLayer.ipynb 36
 T = TypeVar("T")
 
 
@@ -523,7 +535,7 @@ def _prepare_mono_input_n_param(
 
     return inputs, param, sorted_feature_names
 
-# %% ../../nbs/MonoDenseLayer.ipynb 43
+# %% ../../nbs/MonoDenseLayer.ipynb 44
 def _check_convexity_params(
     monotonicity_indicator: List[int],
     is_convex: List[bool],
@@ -546,7 +558,7 @@ def _check_convexity_params(
 
     return has_convex, has_concave
 
-# %% ../../nbs/MonoDenseLayer.ipynb 46
+# %% ../../nbs/MonoDenseLayer.ipynb 47
 @export
 def _create_type_1(
     inputs: Union[TensorLike, Dict[str, TensorLike], List[TensorLike]],
@@ -620,7 +632,7 @@ def _create_type_1(
 
     return y
 
-# %% ../../nbs/MonoDenseLayer.ipynb 51
+# %% ../../nbs/MonoDenseLayer.ipynb 52
 @export
 def _create_type_2(
     inputs: Union[TensorLike, Dict[str, TensorLike], List[TensorLike]],
