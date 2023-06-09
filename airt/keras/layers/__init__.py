@@ -8,19 +8,19 @@ import tensorflow as tf
 
 from ..._components.mono_dense_layer import MonoDense
 
-# %% ../../../nbs/Layers.ipynb 3
+# %% ../../../nbs/Layers.ipynb 4
 def dummy() -> None:
     pass
 
 
 dummy.__module__ = "_dummy"
 
-# %% ../../../nbs/Layers.ipynb 4
+# %% ../../../nbs/Layers.ipynb 5
 __all__ = ["MonoDense"]
 
-# %% ../../../nbs/Layers.ipynb 6
+# %% ../../../nbs/Layers.ipynb 7
 keras_package = "airt.keras.layers"
 
-# %% ../../../nbs/Layers.ipynb 8
+# %% ../../../nbs/Layers.ipynb 9
 if f"{keras_package}>MonoDense" not in tf.keras.utils.get_custom_objects():
     tf.keras.utils.register_keras_serializable(keras_package)(MonoDense)
