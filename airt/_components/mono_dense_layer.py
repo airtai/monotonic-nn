@@ -182,8 +182,8 @@ def replace_kernel_using_monotonicity_indicator(
 keras_package = "airt.keras.layers"
 
 # %% ../../nbs/MonoDenseLayer.ipynb 31
-@export
 @tf.keras.saving.register_keras_serializable(keras_package)
+@export
 class MonoDense(Dense):
     """Monotonic counterpart of the regular Dense Layer of tf.keras
 
