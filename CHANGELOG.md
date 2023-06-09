@@ -2,6 +2,12 @@
 
 <!-- do not remove -->
 
+## 0.3.2
+
+- add support for saving Keras model
+
+
+
 ## 0.3.1
 
 - add support for import different subpackages with the same root packge name and different locations
