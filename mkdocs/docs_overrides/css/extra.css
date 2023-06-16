@@ -10,7 +10,7 @@
 .md-typeset .caution > summary::before {
   background-color: #ff9100;
   -webkit-mask-image: var(--md-admonition-icon--warning);
-          mask-image: var(--md-admonition-icon--warning);
+  mask-image: var(--md-admonition-icon--warning);
 }
 
 .md-typeset .admonition.important,
@@ -25,41 +25,158 @@
 .md-typeset .important > summary::before {
   background-color: #ff1744;
   -webkit-mask-image: var(--md-admonition-icon--danger);
-          mask-image: var(--md-admonition-icon--danger);
+  mask-image: var(--md-admonition-icon--danger);
 }
 
 [data-md-color-scheme="default"] {
-  --md-primary-fg-color:        #003257;
+  --md-primary-fg-color: #003257;
   --md-primary-fg-color--light: #004171;
-  --md-primary-fg-color--dark:  #00233d;
+  --md-primary-fg-color--dark: #00233d;
 }
 .md-header nav .md-header__title {
-    margin-left:0;
+  margin-left: 0;
 }
-.md-typeset a, .md-nav__item .md-nav__link--active, .md-typeset a:hover, .md-nav__link:focus, .md-nav__link:hover, html .md-footer-meta.md-typeset a, html .md-footer-meta.md-typeset a:hover {
-    color: #56b7e1;
+.md-typeset a,
+.md-nav__item .md-nav__link--active,
+.md-typeset a:hover,
+.md-nav__link:focus,
+.md-nav__link:hover,
+html .md-footer-meta.md-typeset a,
+html .md-footer-meta.md-typeset a:hover {
+  color: #56b7e1;
 }
-.md-typeset a:hover, html .md-footer-meta.md-typeset a:hover {
-    text-decoration: underline;
+.md-typeset a:hover,
+html .md-footer-meta.md-typeset a:hover {
+  text-decoration: underline;
 }
 
 .md-footer-meta {
-    background-color: #003257;
+  background-color: #003257;
 }
 
-.md-header__button.md-logo img, .md-header__button.md-logo svg {
-    height: 1rem;
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  height: 1rem;
 }
 
 @media screen and (max-width: 76.1875em) {
-    .md-nav--primary .md-nav__item--active>.md-nav__link {
-        color: #56b7e1;
-    }
+  .md-nav--primary .md-nav__item--active > .md-nav__link {
+    color: #56b7e1;
+  }
 }
 
 [data-md-color-scheme="slate"] {
-  --md-hue: 210; 
-  --md-primary-fg-color:        #003257;
+  --md-hue: 210;
+  --md-primary-fg-color: #003257;
   --md-primary-fg-color--light: #004171;
-  --md-primary-fg-color--dark:  #00233d;
+  --md-primary-fg-color--dark: #00233d;
 }
+
+/* Add airt logo in header changes starts */
+
+header.md-header > nav.md-header__inner {
+  max-width: 100%;
+}
+
+.md-header__button.md-logo img {
+  height: auto;
+  width: 1.55rem;
+}
+.md-header__button.md-logo {
+  margin: 0.4rem 0.13rem 0rem 0.2rem;
+  padding: 0.4rem 0rem 0.4rem 0.4rem;
+}
+
+.md-header__title {
+  font-size: 2.3rem;
+  font-family: "Rubik";
+  font-weight: 500;
+}
+.md-header__title--active .md-header__topic {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+  transition: none;
+  z-index: 0;
+}
+
+.md-header__title--active .md-header__topic + .md-header__topic {
+  opacity: 0;
+}
+nav .sub-header svg {
+  width: 17px;
+  height: auto;
+  fill: #fff;
+}
+
+nav .sub-header .md-sub-header__button.md-sub-logo {
+  font-size: 0.87rem;
+  font-family: "Rubik";
+  font-weight: 600;
+  height: 3.4rem;
+  line-height: 3.4rem;
+  display: inline-block;
+}
+nav .sub-header .md-sub-header__button.md-sub-logo:hover {
+  opacity: 0.7;
+}
+
+nav .sub-header .home-icon {
+  display: inline-block;
+  position: absolute;
+  margin-left: -21px;
+  margin-top: 1.65px;
+}
+
+/* Large Desktop Only */
+
+@media screen and (min-width: 76.25em) {
+  [dir="ltr"] .md-header__source {
+    margin-left: 0;
+  }
+}
+
+/* Desktop only styles */
+
+@media screen and (min-width: 60em) {
+  .md-header__source {
+    max-width: 210px;
+    width: 210px;
+  }
+}
+
+/* Tablet layout */
+@media screen and (max-width: 76.1875em) {
+  .md-header__button.md-logo {
+    display: block;
+    margin: 0.3rem 0.1rem 0.2rem -0.2rem;
+    padding: 0;
+  }
+  .md-header__title {
+    font-size: 1.5rem;
+  }
+  .md-header__button {
+    margin: 0.3rem 0.2rem 0.1rem 0.2rem;
+  }
+  .md-header__button.md-logo img,
+  .md-header__button.md-logo svg {
+    height: auto;
+    width: 1.2rem;
+  }
+  nav .sub-header .home-text {
+    display: none;
+  }
+  nav .sub-header .home-icon {
+    margin-left: -18px;
+    margin-top: 5.8px;
+  }
+}
+
+/* Mobile Layout */
+@media screen and (max-width: 59.9375em) {
+  nav .sub-header .home-icon {
+    margin-left: -33px;
+    margin-top: 5.8px;
+  }
+}
+/* Add airt logo in header changes ends */
