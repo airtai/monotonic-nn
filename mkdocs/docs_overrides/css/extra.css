@@ -88,7 +88,7 @@ header.md-header > nav.md-header__inner {
 }
 
 .md-header__title {
-  font-size: 2.3rem;
+  font-size: 2.4rem;
   font-family: "Rubik";
   font-weight: 500;
 }
@@ -139,9 +139,10 @@ nav .sub-header .home-icon {
 /* Desktop only styles */
 
 @media screen and (min-width: 60em) {
-  .md-header__source {
+  [dir="ltr"] .md-header__source {
     max-width: 210px;
     width: 210px;
+    margin-left: 0;
   }
 }
 
@@ -169,6 +170,20 @@ nav .sub-header .home-icon {
   nav .sub-header .home-icon {
     margin-left: -18px;
     margin-top: 5.8px;
+  }
+  .md-nav--primary.airt-nav .md-nav__title[for="__drawer"] {
+    font-size: 3rem;
+    padding-top: 1rem;
+    padding-left: 3.05rem;
+    height: 4.3rem;
+    font-family: "Rubik";
+  }
+  .md-nav--primary.airt-nav .md-nav__title .md-logo {
+    display: inline-block;
+    margin: 0.67rem 0.2rem 0.2rem 0.2rem;
+  }
+  .md-nav--primary.airt-nav .md-nav__title .md-logo > img {
+    height: 2rem;
   }
 }
 
