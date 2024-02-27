@@ -28,25 +28,25 @@ py_versions = '3.6 3.7 3.8 3.9 3.10 3.11'.split()
 min_python = cfg['min_python']
 lic = licenses.get(cfg['license'].lower(), (cfg['license'], None))
 
-requirements = ["tensorflow>=2.10.0"]
+requirements = ["tensorflow>=2.10"]
 
 experiments_requirements = [
-    "keras-tuner[bayesian]==1.3.5"
+    "keras-tuner[bayesian]==1.4.6"
 ]
 
 dev_requirements = [
-    "nbdev_mkdocs==0.5.1",
-    "pytest==7.3.1",
-    "pandas>=1.3.5",
-    "nbqa==1.7.0",
-    "black==23.3.0",
-    "isort==5.12.0",
-    "matplotlib==3.7.1",
-    "seaborn==0.12.2",
-    "mypy==1.3.0",
-    "bandit==1.7.5",
-    "semgrep==1.23.0",
-    "tqdm",
+    "nbdev_mkdocs==0.6.1",
+    "pytest==8.0.2",
+    "pandas>=2.2.1",
+    "nbqa==1.7.1",
+    "black==24.2.0",
+    "isort==5.13.2",
+    "matplotlib==3.8.3",
+    "seaborn==0.13.2",
+    "mypy==1.8.0",
+    "bandit==1.7.7",
+    "semgrep==1.62.0",
+    "tqdm==4.66.2",
 ]
 
 project_urls = {

@@ -17,3 +17,6 @@ mkdocs/site/
 
 CHANGELOG.bak
 
+.venv*
+venv*
+
