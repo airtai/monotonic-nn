@@ -1,14 +1,14 @@
 {
     "name": "cuda-tf",
-    "image": "mcr.microsoft.com/devcontainers/python:3.11",
+    "image": "mcr.microsoft.com/devcontainers/python:3.9",
     // "hostRequirements": {
-    //     "gpu": "optional" 
+    //     "gpu": "optional"
     // },
     "runArgs": [
         "--gpus=all"
     ],
     "remoteEnv": {
-        "PATH": "${containerEnv:PATH}:/usr/local/cuda/bin",
+        "PATH": "${containerEnv:PATH}:/usr/local/cuda/bin:/home/vscode/.local/bin",
         "LD_LIBRARY_PATH": "$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64",
         "XLA_FLAGS": "--xla_gpu_cuda_data_dir=/usr/local/cuda"
     },
