@@ -1,0 +1,7 @@
+---
+search:
+  exclude: true
+---
+- Contributing
+    - [Development](getting-started/contributing/CONTRIBUTING.md)
+- [Release Notes](release.md)
