@@ -13,7 +13,7 @@ import typer
 from create_api_docs import create_api_docs
 from expand_markdown import expand_markdown
 from mkdocs.config import load_config
-from update_releases import find_metablock, update_release_notes
+from update_releases import _find_metablock, _update_release_notes
 
 IGNORE_DIRS = ("assets", "stylesheets")
 
@@ -39,25 +39,25 @@ config = load_config(str(CONFIG))
 DEV_SERVER = str(config.get("dev_addr", "0.0.0.0:8008"))
 
 
-def get_missing_translation(lng: str) -> Path:
+def _get_missing_translation(lng: str) -> Path:
     return DOCS_DIR / lng / "helpful" / "missing-translation.md"
 
 
-def get_in_progress(lng: str) -> Path:
+def _get_in_progress(lng: str) -> Path:
     return DOCS_DIR / lng / "helpful" / "in-progress.md"
 
 
 app = typer.Typer()
 
 
-def get_default_title(file: Path) -> str:
+def _get_default_title(file: Path) -> str:
     title = file.stem.upper().replace("-", " ")
     if title == "INDEX":
-        title = get_default_title(file.parent)
+        title = _get_default_title(file.parent)
     return title
 
 
-def join_nested(root: Path, path: str) -> Path:
+def _join_nested(root: Path, path: str) -> Path:
     for i in path.split("/"):
         root = root / i
     return _touch_file(root)
@@ -91,6 +91,7 @@ def preview() -> None:
 
 @app.command()
 def live(port: Annotated[Optional[str], typer.Argument()] = None) -> None:
+    """Serve mkdocs with live reload."""
     dev_server = f"0.0.0.0:{port}" if port else DEV_SERVER
 
     typer.echo("Serving mkdocs with live reload")
@@ -100,18 +101,20 @@ def live(port: Annotated[Optional[str], typer.Argument()] = None) -> None:
 
 @app.command()
 def build() -> None:
+    """Build the docs."""
     _build()
 
 
 @app.command()
 def add(path: Annotated[str, typer.Argument(...)]) -> None:
+    """Add a new file to all languages."""
     title = ""
 
     exists = []
     not_exists = []
 
     for i in LANGUAGES_DIRS:
-        file = join_nested(i, path)
+        file = _join_nested(i, path)
 
         if file.exists():
             exists.append(i)
@@ -123,8 +126,8 @@ def add(path: Annotated[str, typer.Argument(...)]) -> None:
         else:
             not_exists.append(i)
             file.write_text(
-                f"# {title or get_default_title(file)} \n"
-                "{! " + str(get_in_progress(i.name)) + " !}"
+                f"# {title or _get_default_title(file)} \n"
+                "{! " + str(_get_in_progress(i.name)) + " !}"
             )
             typer.echo(f"{file} - write `in progress`")
 
@@ -132,14 +135,15 @@ def add(path: Annotated[str, typer.Argument(...)]) -> None:
         for i in not_exists:
             file = i / path
             file.write_text(
-                f"# {title or get_default_title(file)} \n"
-                "{! " + str(get_missing_translation(i.name)) + " !}"
+                f"# {title or _get_default_title(file)} \n"
+                "{! " + str(_get_missing_translation(i.name)) + " !}"
             )
             typer.echo(f"{file} - write `missing translation`")
 
 
 @app.command()
 def rm(path: Annotated[str, typer.Argument(...)]) -> None:
+    """Remove a file from all languages."""
     delete = typer.confirm("Are you sure you want to delete files?")
     if not delete:
         typer.echo("Not deleting")
@@ -164,6 +168,7 @@ def mv(
     path: Annotated[str, typer.Argument(...)],
     new_path: Annotated[str, typer.Argument(...)],
 ) -> None:
+    """Move a file to a new path in all languages."""
     for i in LANGUAGES_DIRS:
         file = i / path
         if file.exists():
@@ -201,7 +206,7 @@ def update_contributing() -> None:
 
     existing_content = CONTRIBUTING_PATH.read_text()
 
-    _, content = find_metablock(existing_content.splitlines())
+    _, content = _find_metablock(existing_content.splitlines())
 
     relative_path = EN_CONTRIBUTING_PATH.relative_to(BASE_DIR.parent)
 
@@ -229,7 +234,7 @@ def _build() -> None:
     update_contributing()
 
     typer.echo("Updating Release Notes")
-    update_release_notes(realease_notes_path=EN_DOCS_DIR / "release.md")
+    _update_release_notes(realease_notes_path=EN_DOCS_DIR / "release.md")
 
     subprocess.run(["mkdocs", "build", "--site-dir", BUILD_DIR], check=True)
 

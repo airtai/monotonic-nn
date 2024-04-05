@@ -51,7 +51,7 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.9", "3.10", "3.11"]
-        tf-version: ["2.10.1", "2.11.1", "2.12.1", "2.13.1", "2.14.1", "2.15.0.post1", "2.16.0rc0"]
+        tf-version: ["2.10.1", "2.11.1", "2.12.1", "2.13.1", "2.14.1", "2.15.0.post1", "2.16.0"]
       fail-fast: false
 
     steps:
@@ -152,11 +152,28 @@ jobs:
           name: coverage-html
           path: htmlcov
 
-  # https://github.com/marketplace/actions/alls-green#why
+  pre-commit-check:
+    runs-on: ubuntu-latest
+    env:
+      SKIP: "static-analysis"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+      # - name: Set $PY environment variable
+      #   run: echo "PY=$(python -VV | sha256sum | cut -d' ' -f1)" >> $GITHUB_ENV
+      # - uses: actions/cache@v4
+      #   with:
+      #     path: ~/.cache/pre-commit
+      #     key: pre-commit|${{ env.PY }}|${{ hashFiles('.pre-commit-config.yaml') }}
+      - uses: pre-commit/action@v3.0.1
+
   check: # This job does nothing and is only used for the branch protection
     if: github.event.pull_request.draft == false
 
     needs:
+      - pre-commit-check
       - static_analysis
       - coverage-combine
       - test-macos-latest

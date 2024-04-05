@@ -12,7 +12,7 @@ authors = [
 
 keywords = ["python"]
 
-requires-python = ">=3.9,<3.12"
+requires-python = ">=3.9,<3.13"
 
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -24,6 +24,7 @@ classifiers = [
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Operating System :: OS Independent",
     "Topic :: Internet",
     "Topic :: Software Development :: Libraries :: Application Frameworks",
@@ -167,20 +168,20 @@ select = [
 ignore = [
     "E501",  # line too long, handled by formatter later
     "C901",  # too complex
-    "D418",  # Function decorated with `@overload` shouldn't contain a docstring
+#    "D418",  # Function decorated with `@overload` shouldn't contain a docstring
 
     # todo pep8-naming
-    "N817",  # CamelCase `*` imported as acronym `*`
-    "N815",  # Variable `*` in class scope should not be mixedCase
-    "N803",  # Argument name `expandMessageExamples` should be lowercase
+#    "N817",  # CamelCase `*` imported as acronym `*`
+#    "N815",  # Variable `*` in class scope should not be mixedCase
+#    "N803",  # Argument name `expandMessageExamples` should be lowercase
 
     # todo pydocstyle
-    "D100",  # missing docstring in public module
-    "D102",
-    "D103",
-    "D104",  # missing docstring in public package
-    "D105",
-    "D106",  # Missing docstring in public nested class
+#    "D100",  # missing docstring in public module
+#    "D102",
+#    "D103",
+#    "D104",  # missing docstring in public package
+#    "D105",
+#    "D106",  # Missing docstring in public nested class
 ]
 
 [tool.ruff.lint.isort]

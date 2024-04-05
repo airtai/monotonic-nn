@@ -1,3 +1,5 @@
+"""Expand markdown files with embedded line references."""
+
 import logging
 import re
 from pathlib import Path
@@ -11,7 +13,7 @@ logging.basicConfig(level=logging.INFO)
 app = typer.Typer()
 
 
-def read_lines_from_file(file_path: Path, lines_spec: Optional[str]) -> str:
+def _read_lines_from_file(file_path: Path, lines_spec: Optional[str]) -> str:
     """Read lines from a file.
 
     Args:
@@ -45,7 +47,7 @@ def read_lines_from_file(file_path: Path, lines_spec: Optional[str]) -> str:
     return "".join(selected_lines)
 
 
-def extract_lines(embedded_line: str) -> str:
+def _extract_lines(embedded_line: str) -> str:
     to_expand_path_elements = re.search("{!>(.*)!}", embedded_line).group(1).strip()  # type: ignore[union-attr]
     lines_spec = ""
     if "[ln:" in to_expand_path_elements:
@@ -60,7 +62,7 @@ def extract_lines(embedded_line: str) -> str:
     else:
         raise ValueError("Couldn't find docs_src directory")
 
-    return read_lines_from_file(base_path / to_expand_path_elements, lines_spec)
+    return _read_lines_from_file(base_path / to_expand_path_elements, lines_spec)
 
 
 @app.command()
@@ -68,6 +70,13 @@ def expand_markdown(
     input_markdown_path: Path = typer.Argument(...),  # noqa: B008
     output_markdown_path: Path = typer.Argument(...),  # noqa: B008
 ) -> None:
+    """Expand markdown files with embedded line references.
+
+    Args:
+        input_markdown_path: The path to the input markdown file.
+        output_markdown_path: The path to the output markdown file.
+
+    """
     with input_markdown_path.open() as input_file, output_markdown_path.open(
         "w"
     ) as output_file:
@@ -77,10 +86,10 @@ def expand_markdown(
                 # Write the line to the output file
                 output_file.write(line)
             else:
-                output_file.write(extract_lines(embedded_line=line))
+                output_file.write(_extract_lines(embedded_line=line))
 
 
-def remove_lines_between_dashes(file_path: Path) -> None:
+def _remove_lines_between_dashes(file_path: Path) -> None:
     with file_path.open() as file:
         lines = file.readlines()
 

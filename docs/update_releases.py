@@ -1,3 +1,5 @@
+"""Update the release notes with the latest version and changelog from GitHub releases."""
+
 import re
 from collections.abc import Sequence
 from pathlib import Path
@@ -5,7 +7,7 @@ from pathlib import Path
 import requests
 
 
-def find_metablock(lines: list[str]) -> tuple[list[str], list[str]]:
+def _find_metablock(lines: list[str]) -> tuple[list[str], list[str]]:
     if lines[0] != "---":
         return [], lines
 
@@ -17,7 +19,7 @@ def find_metablock(lines: list[str]) -> tuple[list[str], list[str]]:
     return lines[:index], lines[index:]
 
 
-def find_header(lines: list[str]) -> tuple[str, list[str]]:
+def _find_header(lines: list[str]) -> tuple[str, list[str]]:
     for i in range(len(lines)):
         if (line := lines[i]).startswith("#"):
             return line, lines[i + 1 :]
@@ -25,7 +27,7 @@ def find_header(lines: list[str]) -> tuple[str, list[str]]:
     return "", lines
 
 
-def get_github_releases() -> Sequence[tuple[str, str]]:
+def _get_github_releases() -> Sequence[tuple[str, str]]:
     # Get the latest version from GitHub releases
     response = requests.get("https://api.github.com/repos/airtai/airt/releases")
     return (
@@ -35,7 +37,7 @@ def get_github_releases() -> Sequence[tuple[str, str]]:
     )
 
 
-def convert_links_and_usernames(text: str) -> str:
+def _convert_links_and_usernames(text: str) -> str:
     if "](" not in text:
         # Convert HTTP/HTTPS links
         text = re.sub(
@@ -52,29 +54,29 @@ def convert_links_and_usernames(text: str) -> str:
     return text
 
 
-def collect_already_published_versions(text: str) -> list[str]:
+def _collect_already_published_versions(text: str) -> list[str]:
     data: list[str] = re.findall(r"## (\d.\d.\d.*)", text)
     return data
 
 
-def update_release_notes(realease_notes_path: Path) -> None:
+def _update_release_notes(realease_notes_path: Path) -> None:
     # Get the changelog from the RELEASE.md file
     changelog = realease_notes_path.read_text()
 
-    metablockx, lines = find_metablock(changelog.splitlines())
+    metablockx, lines = _find_metablock(changelog.splitlines())
     metablock = "\n".join(metablockx)
 
-    header, changelogx = find_header(lines)
+    header, changelogx = _find_header(lines)
     changelog = "\n".join(changelogx)
 
-    old_versions = collect_already_published_versions(changelog)
+    old_versions = _collect_already_published_versions(changelog)
 
     for version, body in filter(
         lambda v: v[0] not in old_versions,
-        get_github_releases(),
+        _get_github_releases(),
     ):
         body = body.replace("##", "###")
-        body = convert_links_and_usernames(body)
+        body = _convert_links_and_usernames(body)
         version_changelog = f"## {version}\n\n{body}\n\n"
         changelog = version_changelog + changelog
 
@@ -93,4 +95,4 @@ def update_release_notes(realease_notes_path: Path) -> None:
 
 if __name__ == "__main__":
     base_dir = Path(__file__).resolve().parent
-    update_release_notes(base_dir / "docs" / "en" / "release.md")
+    _update_release_notes(base_dir / "docs" / "en" / "release.md")

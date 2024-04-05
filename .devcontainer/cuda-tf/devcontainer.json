@@ -1,5 +1,5 @@
 {
-    "name": "cuda-tf",
+    "name": "cuda-11.8",
     "image": "mcr.microsoft.com/devcontainers/python:3.9",
     // "hostRequirements": {
     //     "gpu": "optional"
@@ -22,7 +22,7 @@
             "userGid": "1000"
             // "upgradePackages": "true"
         },
-        "ghcr.io/devcontainers/features/python:1": {},
+        // "ghcr.io/devcontainers/features/python:1": {},
         // "ghcr.io/devcontainers/features/node:1": "none",
         "ghcr.io/devcontainers/features/git:1": {
             "version": "latest",
