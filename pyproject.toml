@@ -40,7 +40,7 @@ classifiers = [
 dynamic = ["version"]
 
 dependencies = [
-    "tensorflow>=2.10,<2.16"
+    "tensorflow>=2.10,<3"
 ]
 
 [project.optional-dependencies]
@@ -50,23 +50,22 @@ docs = [
 
 # dev dependencies
 devdocs = [
-    "mkdocs-material==9.5.3",
-    "mkdocs-static-i18n==1.2.0",
+    "mkdocs-material==9.5.17",
+    "mkdocs-static-i18n==1.2.2",
     "mdx-include==1.4.2",
-    "mkdocstrings[python]==0.24.0",
+    "mkdocstrings[python]==0.24.3",
     "mkdocs-literate-nav==0.6.1",
-    "mkdocs-git-revision-date-localized-plugin==1.2.1",
+    "mkdocs-git-revision-date-localized-plugin==1.2.4",
     "mike==2.0.0",  # versioning
-    "mkdocs-minify-plugin==0.7.2",
+    "mkdocs-minify-plugin==0.8.0",
     "mkdocs-macros-plugin==1.0.5",  # includes with variables
-    "mkdocs-glightbox==0.3.6",  # img zoom
-    "pillow==10.2.0",
+    "mkdocs-glightbox==0.3.7",  # img zoom
+    "pillow==10.3.0",
     "cairosvg==2.7.1",
-    "black==23.12.1",
-    "matplotlib>=3.7,<4",
-    "pandas>=2.0,<3",
+    "matplotlib==3.8.4",
+    "pandas==2.2.1",
     "seaborn==0.13.2",
-    "typer==0.9.0",
+    "typer==0.12.1",
 ]
 
 lint = [
@@ -74,15 +73,15 @@ lint = [
     "types-setuptools",
     "types-Pygments",
     "types-docutils",
-    "mypy==1.8.0",
-    "ruff==0.1.11",
-    "bandit==1.7.6",
-    "semgrep==1.52.0",
+    "mypy==1.9.0",
+    "ruff==0.3.5",
+    "bandit==1.7.8",
+    "semgrep==1.67.0",
 ]
 
 test-core = [
-    "coverage[toml]==7.4.0",
-    "pytest==7.4.4",
+    "coverage[toml]==7.4.4",
+    "pytest==8.1.1",
 ]
 
 testing = [
@@ -91,16 +90,15 @@ testing = [
 
 dev = [
     "monotonic-nn[lint,testing,devdocs]",
-    "pre-commit==3.5.0; python_version < '3.9'",
-    "pre-commit==3.6.0; python_version >= '3.9'",
+    "pre-commit==3.7.0",
     "detect-secrets==1.4.0",
 ]
 
 [project.urls]
-Homepage = "https://airt.airt.ai/latest/"
-Documentation = "https://airt.airt.ai/latest/getting-started/"
-Tracker = "https://github.com/airtai/airt/issues"
-Source = "https://github.com/airtai/airt"
+Homepage = "https://monotonic.airt.ai/"
+Documentation = "https://monotonic.airt.ai/"
+Tracker = "https://github.com/airtai/monotonic-nn/issues"
+Source = "https://github.com/airtai/monotonic-nn"
 
 [tool.hatch.version]
 path = "airt/__about__.py"
@@ -116,6 +114,14 @@ exclude = [
 packages = ["airt"]
 
 [tool.mypy]
+
+files = [
+    "airt",
+    "tests",
+    "docs",
+    "examples",
+]
+
 strict = true
 python_version = "3.9"
 ignore_missing_imports = true
@@ -139,7 +145,14 @@ disallow_any_unimported = false
 fix = true
 line-length = 88
 target-version = "py39"
-include = ["airt/**/*.py", "tests/**/*.pyi", "examples/**/*.py", "docs/*.py", "docs/docs_src/**/*.py", "pyproject.toml"]
+include = [
+    "airt/**/*.py",
+    "tests/**/*.pyi",
+    "examples/**/*.py",
+    "docs/*.py",
+    "docs/docs_src/**/*.py",
+    "pyproject.toml",
+]
 exclude = ["docs/docs_src"]
 
 [tool.ruff.lint]
@@ -168,20 +181,6 @@ select = [
 ignore = [
     "E501",  # line too long, handled by formatter later
     "C901",  # too complex
-#    "D418",  # Function decorated with `@overload` shouldn't contain a docstring
-
-    # todo pep8-naming
-#    "N817",  # CamelCase `*` imported as acronym `*`
-#    "N815",  # Variable `*` in class scope should not be mixedCase
-#    "N803",  # Argument name `expandMessageExamples` should be lowercase
-
-    # todo pydocstyle
-#    "D100",  # missing docstring in public module
-#    "D102",
-#    "D103",
-#    "D104",  # missing docstring in public package
-#    "D105",
-#    "D106",  # Missing docstring in public nested class
 ]
 
 [tool.ruff.lint.isort]

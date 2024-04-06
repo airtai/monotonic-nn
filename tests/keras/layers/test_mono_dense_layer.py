@@ -1,7 +1,7 @@
 import numpy as np
 import tensorflow as tf
 
-from airt.keras.layers._mono_dense_layer import get_activation_functions, apply_activations
+from airt.keras.layers._mono_dense import get_activation_functions, apply_activations
 
 
 def test_activation_functions() -> None:

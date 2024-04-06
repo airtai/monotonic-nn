@@ -77,9 +77,10 @@ def expand_markdown(
         output_markdown_path: The path to the output markdown file.
 
     """
-    with input_markdown_path.open() as input_file, output_markdown_path.open(
-        "w"
-    ) as output_file:
+    with (
+        input_markdown_path.open() as input_file,
+        output_markdown_path.open("w") as output_file,
+    ):
         for line in input_file:
             # Check if the line does not contain the "{!>" pattern
             if "{!>" not in line:
