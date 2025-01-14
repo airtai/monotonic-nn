@@ -37,8 +37,9 @@
         "ghcr.io/iterative/features/nvtop:1": {}
     },
     "updateContentCommand": "bash .devcontainer/cuda-tf/setup.sh",
-    //     "nvidia-smi"
-    // ],
+    "postCreateCommand": [
+        "nvidia-smi"
+    ],
     "customizations": {
         "vscode": {
             "settings": {
