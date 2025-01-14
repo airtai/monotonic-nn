@@ -1,10 +1,8 @@
 __all__ = [
-    "get_activation_functions",
     "apply_activations",
+    "get_activation_functions",
 ]
 
-# # %% ../../nbs/MonoDenseLayer.ipynb 3
-# from contextlib import contextmanager
 from functools import lru_cache
 from typing import Callable, Optional, Union
 
@@ -12,7 +10,6 @@ import numpy as np
 import tensorflow as tf
 
 # from numpy.typing import ArrayLike, NDArray
-# from tensorflow.keras.layers import Concatenate, Dense, Dropout
 from tensorflow.types.experimental import TensorLike
 
 

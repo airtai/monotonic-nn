@@ -1,5 +1,5 @@
 {
-    "name": "cuda-11.8",
+    "name": "Python-3.9",
     "image": "mcr.microsoft.com/devcontainers/python:3.9",
     // "hostRequirements": {
     //     "gpu": "optional"
@@ -28,18 +28,17 @@
             "version": "latest",
             "ppa": true
         },
-        "ghcr.io/devcontainers/features/nvidia-cuda:1": {
-            "installCudnn": true,
-            "cudaVersion": "11.8",
-            "cudnnVersion": "8.6.0.163",
-            "installToolkit": true
-        },
+        // "ghcr.io/devcontainers/features/nvidia-cuda:1": {
+        //     "installCudnn": true,
+        //     "cudaVersion": "12.3",
+        //     "cudnnVersion": "8.9.5.29", // should be "8.9.7.29",
+        //     "installToolkit": true
+        // },
         "ghcr.io/iterative/features/nvtop:1": {}
     },
     "updateContentCommand": "bash .devcontainer/cuda-tf/setup.sh",
-    "postCreateCommand": [
-        "nvidia-smi"
-    ],
+    //     "nvidia-smi"
+    // ],
     "customizations": {
         "vscode": {
             "settings": {
