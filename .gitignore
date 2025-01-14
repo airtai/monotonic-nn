@@ -1,19 +1,24 @@
-run_jupyter.sh
-
-monotonic_nn.egg-info
-_proc
-_docs
-dist
-build
-/.quarto/
-.ipynb_checkpoints
 __pycache__
-
+dist
+.idea
+venv*
+.venv*
+.env
+.env*
+*.lock
+.vscode
+.pypirc
+.pytest_cache
+.ruff_cache
+.mypy_cache
+.coverage*
+.cache
+htmlcov
 token
+.DS_Store
 
-# nbdev_mkdocs
-mkdocs/docs/
-mkdocs/site/
+docs/site/
+docs/site_build/
 
-CHANGELOG.bak
-
+*.bak
+.ipynb_checkpoints

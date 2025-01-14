@@ -69,11 +69,11 @@ as follows:
 
 - if `is_convex` or `is_concave` is **True**, then the activation
   selector **s** will be (`units`, 0, 0) and (0, `units`, 0),
-  respecively.
+  respectively.
 
 - if both `is_convex` or `is_concave` is **False**, then the
   `activation_weights` represent ratios between $\breve{s}$, $\hat{s}$
-  and $\tilde{s}$, respecively. E.g. if `activation_weights = (2, 2, 1)`
+  and $\tilde{s}$, respectively. E.g. if `activation_weights = (2, 2, 1)`
   and `units = 10`, then
 
 $$
@@ -146,7 +146,7 @@ layer instead of `Dense` layer to build a simple monotonic network. By
 default, the
 [`MonoDense`](https://monotonic.airt.ai/latest/api/airt/keras/layers/MonoDense/#airt.keras.layers.MonoDense)
 layer assumes the output of the layer is monotonically increasing with
-all inputs. This assumtion is always true for all layers except possibly
+all inputs. This assumption is always true for all layers except possibly
 the first one. For the first layer, we use `monotonicity_indicator` to
 specify which input parameters are monotonic and to specify are they
 increasingly or decreasingly monotonic:
@@ -187,14 +187,14 @@ model.summary()
 
     Model: "sequential"
     _________________________________________________________________
-     Layer (type)                Output Shape              Param #   
+     Layer (type)                Output Shape              Param #
     =================================================================
-     mono_dense (MonoDense)      (None, 128)               512       
-                                                                     
-     mono_dense_1 (MonoDense)    (None, 128)               16512     
-                                                                     
-     mono_dense_2 (MonoDense)    (None, 1)                 129       
-                                                                     
+     mono_dense (MonoDense)      (None, 128)               512
+
+     mono_dense_1 (MonoDense)    (None, 128)               16512
+
+     mono_dense_2 (MonoDense)    (None, 1)                 129
+
     =================================================================
     Total params: 17,153
     Trainable params: 17,153
@@ -261,7 +261,7 @@ medium or format
 The licensor cannot revoke these freedoms as long as you follow the
 license terms.
 
-Under the following terms: 
+Under the following terms:
 
 - Attribution — You must give appropriate
 credit, provide a link to the license, and indicate if changes were
