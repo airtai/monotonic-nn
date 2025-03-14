@@ -1,0 +1,1643 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Monotonic Neural Networks implemented in Keras">
+      
+      
+        <meta name="author" content="AIRT Technologies d.o.o.">
+      
+      
+        <link rel="canonical" href="https://monotonic.airt.ai/0.3/Experiments/">
+      
+      
+      
+      
+      <link rel="icon" href="../overrides/images/airt_icon_blue.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.8">
+    
+    
+      
+        <title>Experiments - Monotonic Neural Networks</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.8608ea7d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../overrides/css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-F7V44YPJHR"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-F7V44YPJHR",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-F7V44YPJHR",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  
+  
+    
+  
+  
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Monotonic Neural Networks - Experiments" />
+  <meta property="og:description" content="Monotonic Neural Networks implemented in Keras" />
+  <meta property="og:url" content="https://monotonic.airt.ai/0.3/Experiments/" />
+  <meta property="og:image" content="https://opengraph.githubassets.com/1686060464.736638/airtai/monotonic-nn" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Monotonic Neural Networks - Experiments" />
+  <meta name="twitter:description" content="Monotonic Neural Networks implemented in Keras" />
+  <meta name="twitter:image" content="https://opengraph.githubassets.com/1686060464.736638/airtai/monotonic-nn" />
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#experiments" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+          <aside class="md-banner md-banner--warning">
+            <div class="md-banner__inner md-grid md-typeset">
+              
+  You're not viewing the latest version.
+  <!-- nosemgrep -->
+  <a href="../.."> 
+    <strong>Click here to go to latest.</strong>
+  </a>
+
+            </div>
+            <script>var el=document.querySelector("[data-md-component=outdated]"),base=new URL(".."),outdated=__md_get("__outdated",sessionStorage,base);!0===outdated&&el&&(el.hidden=!1)</script>
+          </aside>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Monotonic Neural Networks" class="md-header__button md-logo" aria-label="Monotonic Neural Networks" data-md-component="logo">
+      
+  <img src="../overrides/images/airt_icon_blue.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Monotonic Neural Networks
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Experiments
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="light-blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/airtai/monotonic-nn" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    monotonic-nn
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Monotonic Neural Networks" class="md-nav__button md-logo" aria-label="Monotonic Neural Networks" data-md-component="logo">
+      
+  <img src="../overrides/images/airt_icon_blue.svg" alt="logo">
+
+    </a>
+    Monotonic Neural Networks
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/airtai/monotonic-nn" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    monotonic-nn
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../InDepth/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    In-depth explanation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Experiments
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Experiments
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../experiments/AutoMPG/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Auto MPG
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../experiments/Heart/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Heart disease
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../experiments/Compas/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    COMPAS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../experiments/Blog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Blog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../experiments/Loan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Loan
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../License/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    License
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    API
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    airt
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            airt
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1_1" id="__nav_5_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    keras
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            keras
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1_1_1" id="__nav_5_1_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    layers
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_5_1_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            layers
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/airt/keras/layers/MonoDense/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MonoDense
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1_1_2" id="__nav_5_1_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    experiments
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_5_1_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            experiments
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/airt/keras/experiments/create_tuner_stats/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    create_tuner_stats
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/airt/keras/experiments/df2ds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    df2ds
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/airt/keras/experiments/find_hyperparameters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    find_hyperparameters
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/airt/keras/experiments/get_train_n_test_data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    get_train_n_test_data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/airt/keras/experiments/peek/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    peek
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CHANGELOG/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Releases
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#imports" class="md-nav__link">
+    <span class="md-ellipsis">
+      Imports
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#experiments_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Experiments
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Experiments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get_train_n_test_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_train_n_test_data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#peek" class="md-nav__link">
+    <span class="md-ellipsis">
+      peek
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#df2ds" class="md-nav__link">
+    <span class="md-ellipsis">
+      df2ds
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#find_hyperparameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      find_hyperparameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_tuner_stats" class="md-nav__link">
+    <span class="md-ellipsis">
+      create_tuner_stats
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="experiments">Experiments<a class="headerlink" href="#experiments" title="Permanent link">¤</a></h1>
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+
+<h2 id="imports">Imports<a class="headerlink" href="#imports" title="Permanent link">¤</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">keras_tuner</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomSearch</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;TF_FORCE_GPU_ALLOW_GROWTH&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;true&quot;</span>
+</code></pre></div>
+<h2 id="experiments_1">Experiments<a class="headerlink" href="#experiments_1" title="Permanent link">¤</a></h2>
+<p>For our experiments, we employ the datasets used by the authors of
+Certified Monotonic Network [1] and COMET [2]. We use the exact
+train-test split provided by the authors. Their respective repositories
+are linked below in the references. We directly load the saved
+train-test data split which have been saved after running the codes from
+respective papers’ authors.</p>
+<p>References:</p>
+<ol>
+<li>Xingchao Liu, Xing Han, Na Zhang, and Qiang Liu. Certified monotonic
+    neural networks. Advances in Neural Information Processing Systems,
+    33:15427–15438, 2020</li>
+</ol>
+<p>Github repo: <a href="https://github.com/gnobitab/CertifiedMonotonicNetwork">https://github.com/gnobitab/CertifiedMonotonicNetwork</a></p>
+<ol>
+<li>Aishwarya Sivaraman, Golnoosh Farnadi, Todd Millstein, and Guy Van
+    den Broeck. Counterexample-guided learning of monotonic neural
+    networks. Advances in Neural Information Processing Systems,
+    33:11936–11948, 2020</li>
+</ol>
+<p>Github repo: <a href="https://github.com/AishwaryaSivaraman/COMET">https://github.com/AishwaryaSivaraman/COMET</a></p>
+<div class="highlight"><pre><span></span><code><span class="n">_download_data</span><span class="p">(</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="n">force_download</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="err">!</span><span class="n">ls</span> <span class="o">-</span><span class="n">l</span> <span class="n">data</span>
+
+<span class="k">assert</span> <span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;train_auto.csv&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>train_auto.csv: 49.2kB [00:01, 48.4kB/s]                            
+test_auto.csv: 16.4kB [00:00, 20.2kB/s]
+
+total 257812
+-rw-rw-r-- 1 davor davor    11161 Jun  2 13:28 test_auto.csv
+-rw-rw-r-- 1 davor davor 11340054 May 25 04:48 test_blog.csv
+-rw-rw-r-- 1 davor davor   101210 May 25 04:48 test_compas.csv
+-rw-rw-r-- 1 davor davor    15798 May 25 04:48 test_heart.csv
+-rw-rw-r-- 1 davor davor 13339777 May 25 04:48 test_loan.csv
+-rw-rw-r-- 1 davor davor    44626 Jun  2 13:28 train_auto.csv
+-rw-rw-r-- 1 davor davor 79478767 May 25 04:48 train_blog.csv
+-rw-rw-r-- 1 davor davor   405660 May 25 04:48 train_compas.csv
+-rw-rw-r-- 1 davor davor    62282 May 25 04:48 train_heart.csv
+-rw-rw-r-- 1 davor davor 79588030 May 25 04:48 train_loan.csv
+-rw-rw-r-- 1 davor davor 79588030 May 29 13:57 {prefix}_{name}.csv
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">_sanitize_col_names</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;a b&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]}))</span>
+</code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+&#10;    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+&#10;    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+|     | a_b |
+|-----|-----|
+| 0   | 1   |
+| 1   | 2   |
+| 2   | 3   |
+
+</div>
+
+<hr />
+<p><a
+href="https://github.com/airtai/monotonic-nn/blob/main/airt/keras/experiments.py#L93"
+target="_blank" style="float:right; font-size:smaller">source</a></p>
+<h3 id="get_train_n_test_data">get_train_n_test_data<a class="headerlink" href="#get_train_n_test_data" title="Permanent link">¤</a></h3>
+<blockquote>
+<p>get_train_n_test_data (dataset_name:str,
+                            data_path:Union[pathlib.Path,str,NoneType]='./data
+                            ')</p>
+</blockquote>
+<p>Download data</p>
+<p>Args: dataset_name: name of the dataset, one of “auto”, “heart”,
+compas”, “blog”, “loan” data_path: root directory where to download data
+to</p>
+<div class="highlight"><pre><span></span><code><span class="n">train_df</span><span class="p">,</span> <span class="n">test_df</span> <span class="o">=</span> <span class="n">get_train_n_test_data</span><span class="p">(</span><span class="s2">&quot;auto&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">train_df</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">test_df</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Upload skipped, file /home/davor/work/projects/airt/mono-dense-keras/nbs/data/train_auto.csv exists.
+Upload skipped, file /home/davor/work/projects/airt/mono-dense-keras/nbs/data/test_auto.csv exists.
+</code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+&#10;    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+&#10;    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+|  | Cylinders | Displacement | Horsepower | Weight | Acceleration | Model_Year | Origin | ground_truth |
+|----|----|----|----|----|----|----|----|----|
+| 0 | 1.482807 | 1.073028 | 0.650564 | 0.606625 | -1.275546 | -1.631803 | -0.701669 | 18.0 |
+| 1 | 1.482807 | 1.482902 | 1.548993 | 0.828131 | -1.452517 | -1.631803 | -0.701669 | 15.0 |
+| 2 | 1.482807 | 1.044432 | 1.163952 | 0.523413 | -1.275546 | -1.631803 | -0.701669 | 16.0 |
+| 3 | 1.482807 | 1.025368 | 0.907258 | 0.542165 | -1.806460 | -1.631803 | -0.701669 | 17.0 |
+| 4 | 1.482807 | 2.235927 | 2.396084 | 1.587581 | -1.983431 | -1.631803 | -0.701669 | 15.0 |
+| ... | ... | ... | ... | ... | ... | ... | ... | ... |
+| 309 | 0.310007 | 0.358131 | 0.188515 | -0.177437 | -0.319901 | 1.720778 | -0.701669 | 22.0 |
+| 310 | -0.862792 | -0.566468 | -0.530229 | -0.722413 | -0.921604 | 1.720778 | -0.701669 | 36.0 |
+| 311 | -0.862792 | -0.928683 | -1.351650 | -1.003691 | 3.184131 | 1.720778 | 0.557325 | 44.0 |
+| 312 | -0.862792 | -0.566468 | -0.530229 | -0.810312 | -1.417123 | 1.720778 | -0.701669 | 32.0 |
+| 313 | -0.862792 | -0.709448 | -0.658576 | -0.423555 | 1.060475 | 1.720778 | -0.701669 | 28.0 |
+
+<p>314 rows × 8 columns</p>
+</div>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+&#10;    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+&#10;    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+|  | Cylinders | Displacement | Horsepower | Weight | Acceleration | Model_Year | Origin | ground_truth |
+|----|----|----|----|----|----|----|----|----|
+| 0 | -0.862792 | -1.043066 | -1.017947 | -1.027131 | 1.272841 | 1.162014 | 1.816319 | 40.8 |
+| 1 | 1.482807 | 1.177880 | 1.163952 | 0.526929 | -1.629489 | -1.631803 | -0.701669 | 18.0 |
+| 2 | 1.482807 | 1.482902 | 1.934034 | 0.794143 | -1.629489 | -0.793657 | -0.701669 | 11.0 |
+| 3 | 0.310007 | 0.529707 | -0.119518 | 0.346443 | -0.213718 | -1.352421 | -0.701669 | 19.0 |
+| 4 | -0.862792 | -1.004939 | -0.863931 | -1.243949 | -0.567661 | 0.882633 | 0.557325 | 31.9 |
+| ... | ... | ... | ... | ... | ... | ... | ... | ... |
+| 73 | -0.862792 | -0.699916 | 0.188515 | -0.062582 | -0.390690 | -1.073039 | 0.557325 | 18.0 |
+| 74 | -0.862792 | -0.518809 | -0.838261 | -0.686081 | 1.379024 | -0.793657 | -0.701669 | 21.0 |
+| 75 | 0.310007 | -0.251914 | 0.701903 | -0.089538 | -1.487912 | 1.162014 | 1.816319 | 32.7 |
+| 76 | 1.482807 | 1.492434 | 1.138283 | 1.580549 | -0.390690 | 0.323869 | -0.701669 | 16.0 |
+| 77 | 0.310007 | -0.375829 | 0.060168 | -0.602870 | -0.567661 | -0.793657 | -0.701669 | 21.0 |
+
+<p>78 rows × 8 columns</p>
+</div>
+
+<hr />
+<p><a
+href="https://github.com/airtai/monotonic-nn/blob/main/airt/keras/experiments.py#L132"
+target="_blank" style="float:right; font-size:smaller">source</a></p>
+<h3 id="peek">peek<a class="headerlink" href="#peek" title="Permanent link">¤</a></h3>
+<blockquote>
+<p>peek (ds:tensorflow.python.data.ops.dataset_ops.DatasetV2)</p>
+</blockquote>
+<p>Returns the first element of the dataset</p>
+<p>Args: ds: dataset</p>
+<p>Returns: the first element of the dataset</p>
+<hr />
+<p><a
+href="https://github.com/airtai/monotonic-nn/blob/main/airt/keras/experiments.py#L115"
+target="_blank" style="float:right; font-size:smaller">source</a></p>
+<h3 id="df2ds">df2ds<a class="headerlink" href="#df2ds" title="Permanent link">¤</a></h3>
+<blockquote>
+<p>df2ds (df:pandas.core.frame.DataFrame)</p>
+</blockquote>
+<p>Converts DataFrame to Dataset</p>
+<p>Args: df: input DataFrame</p>
+<p>Returns: dataset</p>
+<div class="highlight"><pre><span></span><code><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">peek</span><span class="p">(</span><span class="n">df2ds</span><span class="p">(</span><span class="n">train_df</span><span class="p">)</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">expected</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Acceleration&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Cylinders&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Displacement&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Horsepower&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Model_Year&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Origin&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Weight&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="k">assert</span> <span class="nb">set</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="n">expected</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">expected</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">8</span><span class="p">,)</span>
+<span class="k">assert</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">8</span><span class="p">,)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>{&#39;Cylinders&#39;: &lt;tf.Tensor: shape=(8,), dtype=float32, numpy=
+ array([1.4828068, 1.4828068, 1.4828068, 1.4828068, 1.4828068, 1.4828068,
+        1.4828068, 1.4828068], dtype=float32)&gt;,
+ &#39;Displacement&#39;: &lt;tf.Tensor: shape=(8,), dtype=float32, numpy=
+ array([1.0730283, 1.4829025, 1.0444324, 1.0253685, 2.235927 , 2.474226 ,
+        2.3407786, 1.8641808], dtype=float32)&gt;,
+ &#39;Horsepower&#39;: &lt;tf.Tensor: shape=(8,), dtype=float32, numpy=
+ array([0.65056413, 1.5489933 , 1.1639522 , 0.9072582 , 2.3960838 ,
+        2.9608107 , 2.8324637 , 2.1907284 ], dtype=float32)&gt;,
+ &#39;Weight&#39;: &lt;tf.Tensor: shape=(8,), dtype=float32, numpy=
+ array([0.6066247, 0.828131 , 0.5234134, 0.5421652, 1.5875812, 1.602817 ,
+        1.5535934, 1.0121336], dtype=float32)&gt;,
+ &#39;Acceleration&#39;: &lt;tf.Tensor: shape=(8,), dtype=float32, numpy=
+ array([-1.2755462, -1.4525175, -1.2755462, -1.8064601, -1.9834315,
+        -2.3373742, -2.5143454, -2.5143454], dtype=float32)&gt;,
+ &#39;Model_Year&#39;: &lt;tf.Tensor: shape=(8,), dtype=float32, numpy=
+ array([-1.6318026, -1.6318026, -1.6318026, -1.6318026, -1.6318026,
+        -1.6318026, -1.6318026, -1.6318026], dtype=float32)&gt;,
+ &#39;Origin&#39;: &lt;tf.Tensor: shape=(8,), dtype=float32, numpy=
+ array([-0.7016686, -0.7016686, -0.7016686, -0.7016686, -0.7016686,
+        -0.7016686, -0.7016686, -0.7016686], dtype=float32)&gt;}
+
+&lt;tf.Tensor: shape=(8,), dtype=float32, numpy=array([18., 15., 16., 17., 15., 14., 14., 15.], dtype=float32)&gt;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">train_df</span><span class="p">,</span> <span class="n">test_df</span> <span class="o">=</span> <span class="n">get_train_n_test_data</span><span class="p">(</span><span class="s2">&quot;auto&quot;</span><span class="p">)</span>
+<span class="n">train_ds</span> <span class="o">=</span> <span class="n">df2ds</span><span class="p">(</span><span class="n">train_df</span><span class="p">)</span>
+<span class="n">test_ds</span> <span class="o">=</span> <span class="n">df2ds</span><span class="p">(</span><span class="n">test_df</span><span class="p">)</span>
+
+<span class="n">build_model_f</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">_build_mono_model_f</span><span class="p">(</span>
+    <span class="n">monotonicity_indicator</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;Cylinders&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;Displacement&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;Horsepower&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;Weight&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;Acceleration&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;Model_Year&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;Origin&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">final_activation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;mse&quot;</span><span class="p">,</span>
+    <span class="n">metrics</span><span class="o">=</span><span class="s2">&quot;mse&quot;</span><span class="p">,</span>
+    <span class="n">train_ds</span><span class="o">=</span><span class="n">train_ds</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+    <span class="n">units</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+    <span class="n">n_layers</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;elu&quot;</span><span class="p">,</span>
+    <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+    <span class="n">weight_decay</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>
+    <span class="n">dropout</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+    <span class="n">decay_rate</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">build_model_f</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_ds</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="n">validation_data</span><span class="o">=</span><span class="n">test_ds</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="mi">256</span><span class="p">),</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Upload skipped, file /home/davor/work/projects/airt/mono-dense-keras/nbs/data/train_auto.csv exists.
+Upload skipped, file /home/davor/work/projects/airt/mono-dense-keras/nbs/data/test_auto.csv exists.
+Model: &quot;model&quot;
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ Acceleration (InputLayer)      [(None, 1)]          0           []
+
+ Cylinders (InputLayer)         [(None, 1)]          0           []
+
+ Displacement (InputLayer)      [(None, 1)]          0           []
+
+ Horsepower (InputLayer)        [(None, 1)]          0           []
+
+ Model_Year (InputLayer)        [(None, 1)]          0           []
+
+ Origin (InputLayer)            [(None, 1)]          0           []
+
+ Weight (InputLayer)            [(None, 1)]          0           []
+
+ dense_Acceleration (Dense)     (None, 4)            8           [&#39;Acceleration[0][0]&#39;]
+
+ dense_Cylinders (Dense)        (None, 4)            8           [&#39;Cylinders[0][0]&#39;]
+
+ mono_dense_Displacement_decrea  (None, 4)           8           [&#39;Displacement[0][0]&#39;]           
+ sing (MonoDense)
+
+ mono_dense_Horsepower_decreasi  (None, 4)           8           [&#39;Horsepower[0][0]&#39;]             
+ ng (MonoDense)
+
+ dense_Model_Year (Dense)       (None, 4)            8           [&#39;Model_Year[0][0]&#39;]
+
+ dense_Origin (Dense)           (None, 4)            8           [&#39;Origin[0][0]&#39;]
+
+ mono_dense_Weight_decreasing (  (None, 4)           8           [&#39;Weight[0][0]&#39;]                 
+ MonoDense)
+
+ preprocessed_features (Concate  (None, 28)          0           [&#39;dense_Acceleration[0][0]&#39;,     
+ nate)                                                            &#39;dense_Cylinders[0][0]&#39;,        
+                                                                  &#39;mono_dense_Displacement_decreas
+                                                                 ing[0][0]&#39;,                      
+                                                                  &#39;mono_dense_Horsepower_decreasin
+                                                                 g[0][0]&#39;,                        
+                                                                  &#39;dense_Model_Year[0][0]&#39;,       
+                                                                  &#39;dense_Origin[0][0]&#39;,           
+                                                                  &#39;mono_dense_Weight_decreasing[0]
+                                                                 [0]&#39;]
+
+ mono_dense_0 (MonoDense)       (None, 16)           464         [&#39;preprocessed_features[0][0]&#39;]
+
+ dropout (Dropout)              (None, 16)           0           [&#39;mono_dense_0[0][0]&#39;]
+
+ mono_dense_1_increasing (MonoD  (None, 16)          272         [&#39;dropout[0][0]&#39;]                
+ ense)
+
+ dropout_1 (Dropout)            (None, 16)           0           [&#39;mono_dense_1_increasing[0][0]&#39;]
+
+ mono_dense_2_increasing (MonoD  (None, 1)           17          [&#39;dropout_1[0][0]&#39;]              
+ ense)
+
+==================================================================================================
+Total params: 809
+Trainable params: 809
+Non-trainable params: 0
+__________________________________________________________________________________________________
+40/40 [==============================] - 4s 12ms/step - loss: 150.6315 - mse: 150.6315 - val_loss: 342.8134 - val_mse: 342.8134
+
+&lt;keras.callbacks.History&gt;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">hp_params_f</span><span class="p">(</span><span class="n">hp</span><span class="p">:</span> <span class="n">HyperParameters</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">units</span><span class="o">=</span><span class="n">hp</span><span class="o">.</span><span class="n">Fixed</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;units&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span>
+        <span class="n">layers</span><span class="o">=</span><span class="n">hp</span><span class="o">.</span><span class="n">Fixed</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;units&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+    <span class="p">)</span>
+
+
+<span class="k">with</span> <span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">d</span><span class="p">:</span>
+    <span class="n">tuner</span> <span class="o">=</span> <span class="n">RandomSearch</span><span class="p">(</span>
+        <span class="n">hypermodel</span><span class="o">=</span><span class="n">_TestHyperModel</span><span class="p">(</span>
+            <span class="n">monotonicity_indicator</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;Cylinders&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">&quot;Displacement&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+                <span class="s2">&quot;Horsepower&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+                <span class="s2">&quot;Weight&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+                <span class="s2">&quot;Acceleration&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">&quot;Model_Year&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">&quot;Origin&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">hp_params_f</span><span class="o">=</span><span class="k">lambda</span> <span class="n">hp</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="n">hp</span><span class="o">.</span><span class="n">Fixed</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;units&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">3</span><span class="p">)},</span>
+            <span class="n">final_activation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;mse&quot;</span><span class="p">,</span>
+            <span class="n">metrics</span><span class="o">=</span><span class="s2">&quot;mse&quot;</span><span class="p">,</span>
+            <span class="n">train_ds</span><span class="o">=</span><span class="n">train_ds</span><span class="p">,</span>
+            <span class="n">batch_size</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">directory</span><span class="o">=</span><span class="n">d</span><span class="p">,</span>
+        <span class="n">project_name</span><span class="o">=</span><span class="s2">&quot;testing&quot;</span><span class="p">,</span>
+        <span class="n">max_trials</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">objective</span><span class="o">=</span><span class="s2">&quot;val_loss&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">tuner</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+        <span class="n">train_ds</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train_ds</span><span class="p">))</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">prefetch</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+        <span class="n">validation_data</span><span class="o">=</span><span class="n">test_ds</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="mi">256</span><span class="p">),</span>
+        <span class="n">epochs</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Trial 2 Complete [00h 00m 03s]
+val_loss: 28.08372688293457
+
+Best val_loss So Far: 28.08372688293457
+Total elapsed time: 00h 00m 07s
+INFO:tensorflow:Oracle triggered exit
+</code></pre></div>
+<hr />
+<p><a
+href="https://github.com/airtai/monotonic-nn/blob/main/airt/keras/experiments.py#L239"
+target="_blank" style="float:right; font-size:smaller">source</a></p>
+<h3 id="find_hyperparameters">find_hyperparameters<a class="headerlink" href="#find_hyperparameters" title="Permanent link">¤</a></h3>
+<blockquote>
+<p>find_hyperparameters (dataset_name:str,
+                           monotonicity_indicator:Dict[str,int], final_activat
+                           ion:Union[str,Callable[[Union[tensorflow.python.typ
+                           es.core.Tensor,tensorflow.python.types.core.TensorP
+                           rotocol,int,float,bool,str,bytes,complex,tuple,list
+                           ,numpy.ndarray,numpy.generic],Union[tensorflow.pyth
+                           on.types.core.Tensor,tensorflow.python.types.core.T
+                           ensorProtocol,int,float,bool,str,bytes,complex,tupl
+                           e,list,numpy.ndarray,numpy.generic]],Union[tensorfl
+                           ow.python.types.core.Tensor,tensorflow.python.types
+                           .core.TensorProtocol,int,float,bool,str,bytes,compl
+                           ex,tuple,list,numpy.ndarray,numpy.generic]]], loss:
+                           Union[str,Callable[[Union[tensorflow.python.types.c
+                           ore.Tensor,tensorflow.python.types.core.TensorProto
+                           col,int,float,bool,str,bytes,complex,tuple,list,num
+                           py.ndarray,numpy.generic],Union[tensorflow.python.t
+                           ypes.core.Tensor,tensorflow.python.types.core.Tenso
+                           rProtocol,int,float,bool,str,bytes,complex,tuple,li
+                           st,numpy.ndarray,numpy.generic]],Union[tensorflow.p
+                           ython.types.core.Tensor,tensorflow.python.types.cor
+                           e.TensorProtocol,int,float,bool,str,bytes,complex,t
+                           uple,list,numpy.ndarray,numpy.generic]]], metrics:U
+                           nion[str,Callable[[Union[tensorflow.python.types.co
+                           re.Tensor,tensorflow.python.types.core.TensorProtoc
+                           ol,int,float,bool,str,bytes,complex,tuple,list,nump
+                           y.ndarray,numpy.generic],Union[tensorflow.python.ty
+                           pes.core.Tensor,tensorflow.python.types.core.Tensor
+                           Protocol,int,float,bool,str,bytes,complex,tuple,lis
+                           t,numpy.ndarray,numpy.generic]],Union[tensorflow.py
+                           thon.types.core.Tensor,tensorflow.python.types.core
+                           .TensorProtocol,int,float,bool,str,bytes,complex,tu
+                           ple,list,numpy.ndarray,numpy.generic]]], hp_params_
+                           f:Optional[Callable[[keras_tuner.engine.hyperparame
+                           ters.hyperparameters.HyperParameters],Dict[str,Any]
+                           ]]=None, max_trials:int=100, max_epochs:int=50,
+                           batch_size:int=8, objective:Union[str,keras_tuner.e
+                           ngine.objective.Objective], direction:str,
+                           dir_root:Union[pathlib.Path,str]='tuner',
+                           seed:int=42, executions_per_trial:int=3,
+                           max_consecutive_failed_trials:int=5,
+                           patience:int=10)</p>
+</blockquote>
+<p>Search for optimal hyperparameters</p>
+<p>Args: dataset_name: name of the dataset, one of “auto”, “heart”,
+compas”, “blog”, “loan” monotonicity_indicator: monotonicity indicator
+as used in
+<a href="https://airtai.github.io/monotonic-nn/monodenselayer.html#monodense.__init__"><code>MonoDense.__init__</code></a>
+final_activation: final activation of the neural network loss:
+Tensorflow loss function metrics: Tensorflow metrics function
+hp_params_f: a function constructing sampling hyperparameters using
+Keras Tuner max_trials: maximum number of trials max_epochs: maximum
+number of epochs in each trial batch_size: batch size objective:
+objective, typically f”val_{metrics}” direction: direction of the
+objective, either “min” or “max” dir_root: root directory for storing
+Keras Tuner data seed: random seed used to guarantee reproducibility of
+results executions_per_trial: number of executions per trial. Set it to
+number higher than zero for small datasets
+max_consecutive_failed_trials: maximum number of failed trials as used
+in Keras Tuner patience: number of epoch with worse objective before
+stopping trial early</p>
+<p>Returns: An instance of Keras Tuner</p>
+<div class="highlight"><pre><span></span><code><span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="s2">&quot;tuner&quot;</span><span class="p">,</span> <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">tuner</span> <span class="o">=</span> <span class="n">find_hyperparameters</span><span class="p">(</span>
+    <span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+    <span class="n">monotonicity_indicator</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;Cylinders&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;Displacement&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;Horsepower&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;Weight&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;Acceleration&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;Model_Year&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;Origin&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">max_trials</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">final_activation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;mse&quot;</span><span class="p">,</span>
+    <span class="n">metrics</span><span class="o">=</span><span class="s2">&quot;mse&quot;</span><span class="p">,</span>
+    <span class="n">objective</span><span class="o">=</span><span class="s2">&quot;val_mse&quot;</span><span class="p">,</span>
+    <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;min&quot;</span><span class="p">,</span>
+    <span class="n">max_epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">executions_per_trial</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Trial 2 Complete [00h 00m 03s]
+val_mse: 32.87412643432617
+
+Best val_mse So Far: 32.87412643432617
+Total elapsed time: 00h 00m 06s
+INFO:tensorflow:Oracle triggered exit
+</code></pre></div>
+<hr />
+<p><a
+href="https://github.com/airtai/monotonic-nn/blob/main/airt/keras/experiments.py#L386"
+target="_blank" style="float:right; font-size:smaller">source</a></p>
+<h3 id="create_tuner_stats">create_tuner_stats<a class="headerlink" href="#create_tuner_stats" title="Permanent link">¤</a></h3>
+<blockquote>
+<p>create_tuner_stats (tuner:keras_tuner.engine.tuner.Tuner,
+                         num_models:int=10, max_epochs:int=50,
+                         batch_size:int=8, patience:int=10, verbose:int=0)</p>
+</blockquote>
+<p>Calculates statistics for the best models found by Keras Tuner</p>
+<p>Args: tuner: an instance of Keras Tuner num_models: number of best
+models to use for calculating statistics max_epochs: maximum number of
+epochs used in runs batch_size: batch_size patience: maximum number of
+epochs with worse objective before stopping trial early verbose:
+verbosity level of <code>Model.fit</code> function</p>
+<p>Returns: A dataframe with statistics</p>
+<div class="highlight"><pre><span></span><code><span class="n">stats</span> <span class="o">=</span> <span class="n">create_tuner_stats</span><span class="p">(</span><span class="n">tuner</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Upload skipped, file /home/davor/work/projects/airt/mono-dense-keras/nbs/data/train_auto.csv exists.
+Upload skipped, file /home/davor/work/projects/airt/mono-dense-keras/nbs/data/test_auto.csv exists.
+WARNING:tensorflow:6 out of the last 8 calls to &lt;function Model.make_test_function.&lt;locals&gt;.test_function&gt; triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+</code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+&#10;    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+&#10;    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+|  | units | n_layers | activation | learning_rate | weight_decay | dropout | decay_rate | val_mse_mean | val_mse_std | val_mse_min | val_mse_max | params |
+|----|----|----|----|----|----|----|----|----|----|----|----|----|
+| 0 | 9 | 2 | elu | 0.265157 | 0.196993 | 0.456821 | 0.560699 | 12.738773 | 1.8673 | 10.745923 | 15.125115 | 173 |
+
+</div>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+&#10;    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+&#10;    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+|  | units | n_layers | activation | learning_rate | weight_decay | dropout | decay_rate | val_mse_mean | val_mse_std | val_mse_min | val_mse_max | params |
+|----|----|----|----|----|----|----|----|----|----|----|----|----|
+| 0 | 9 | 2 | elu | 0.265157 | 0.196993 | 0.456821 | 0.560699 | 12.738773 | 1.86730 | 10.745923 | 15.125115 | 173 |
+| 1 | 23 | 1 | elu | 0.004715 | 0.265345 | 0.175923 | 0.816107 | 21.378424 | 1.74334 | 18.393272 | 22.992588 | 106 |
+
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      2022 onwards, AIRT Technologies d.o.o.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+    and 
+    <a href="https://nbdev-mkdocs.airt.ai/" target="_blank" rel="noopener">
+      Material for nbdev
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.indexes", "navigation.top", "search.suggest", "search.highlight", "search.share", "content.code.copy"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="../overrides/js/extra.js"></script>
+      
+        <script src="../overrides/js/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
