@@ -23,30 +23,31 @@ licenses = {
 }
 statuses = [ '1 - Planning', '2 - Pre-Alpha', '3 - Alpha',
     '4 - Beta', '5 - Production/Stable', '6 - Mature', '7 - Inactive' ]
-py_versions = '3.6 3.7 3.8 3.9 3.10 3.11'.split()
+py_versions = '3.9 3.10 3.11 3.12'.split()
 
 min_python = cfg['min_python']
 lic = licenses.get(cfg['license'].lower(), (cfg['license'], None))
 
-requirements = ["tensorflow>=2.10.0"]
+requirements = ["tensorflow>=2.10.0,<2.16"]
 
 experiments_requirements = [
     "keras-tuner[bayesian]==1.3.5"
 ]
 
 dev_requirements = [
-    "nbdev_mkdocs==0.5.1",
-    "pytest==7.3.1",
-    "pandas>=1.3.5",
-    "nbqa==1.7.0",
-    "black==23.3.0",
-    "isort==5.12.0",
-    "matplotlib==3.7.1",
-    "seaborn==0.12.2",
-    "mypy==1.3.0",
-    "bandit==1.7.5",
-    "semgrep==1.23.0",
-    "tqdm",
+    "nbdev-mkdocs==0.6.1",
+    "pytest==8.3.5",
+    "pandas==2.2.3",
+    "nbqa==1.9.1",
+    "black==25.1.0",
+    "isort==6.0.1",
+    "matplotlib>=3.9",
+    "seaborn==0.13.2",
+    "mypy==1.15.0",
+    "bandit==1.8.3",
+    "semgrep==1.112.0",
+    "tqdm==4.67.1",
+    "numpy<2"
 ]
 
 project_urls = {
