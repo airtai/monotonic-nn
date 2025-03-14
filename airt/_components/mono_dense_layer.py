@@ -46,7 +46,7 @@ def get_saturated_activation(
 
 @lru_cache
 def get_activation_functions(
-    activation: Optional[Union[str, Callable[[TensorLike], TensorLike]]] = None
+    activation: Optional[Union[str, Callable[[TensorLike], TensorLike]]] = None,
 ) -> Tuple[
     Callable[[TensorLike], TensorLike],
     Callable[[TensorLike], TensorLike],

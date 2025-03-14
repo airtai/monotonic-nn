@@ -17,3 +17,7 @@ mkdocs/site/
 
 CHANGELOG.bak
 
+.venv*
+.env*
+.vscode
+*.bak
