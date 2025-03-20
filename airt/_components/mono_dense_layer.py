@@ -2,7 +2,8 @@
 
 # %% auto 0
 __all__ = ['T', 'get_saturated_activation', 'get_activation_functions', 'apply_activations', 'get_monotonicity_indicator',
-           'apply_monotonicity_indicator_to_kernel', 'replace_kernel_using_monotonicity_indicator', 'MonoDense']
+           'apply_monotonicity_indicator_to_kernel', 'replace_kernel_using_monotonicity_indicator', 'MonoDense',
+           'CDFHead']
 
 # %% ../../nbs/MonoDenseLayer.ipynb 3
 from contextlib import contextmanager
@@ -737,3 +738,39 @@ def _create_type_2(
         y = tf.keras.activations.get(final_activation)(y)
 
     return y
+
+# %% ../../nbs/MonoDenseLayer.ipynb 52
+from keras.layers import Layer
+
+# Optimizacija CDFHead modula s novim izračunom gubitka mreže koristeći dinamički uzrokovane vremenske trenutke na razini grupe (batch) kao dinamičke granice diskretnih grupa. Ova metoda će dodatno ubrzati treniranje modela uz očuvanje točnosti modela kao i kod trenutne implementacije koja koristi gradijent CDF-a da bi izračunala PDF i vjerojatnosti danih događaja.
+
+
+@export
+class CDFHead(Layer):
+    """Continuos Distribution Function (CDF) Head
+
+    This is an implementation of the Continuos Distribution Function (CDF) Head. It uses dynamically sampled time points
+    at batch level as dynamic boundaries of discrete groups. This method speeds up the training of the model while preserving
+    the accuracy of the model as in the current implementation that uses the CDF gradient to compute the PDF and probabilities
+    of given events.
+
+
+    """
+
+    def __init__(
+        self,
+        **kwargs: Any,
+    ):
+        """Constructs a new CDFHead instance.
+
+        This is an implementation of the Continuos Distribution Function (CDF) Head. It uses dynamically sampled time points
+        at batch level as dynamic boundaries of discrete groups. This method speeds up the training of the model while preserving
+        the accuracy of the model as in the current implementation that uses the CDF gradient to compute the PDF and probabilities
+        of given events.
+
+
+        Args:
+            **kwargs: passed as kwargs to the constructor of `Layer`
+
+        """
+        super(CDFHead, self).__init__(**kwargs)
