@@ -36,6 +36,8 @@ experiments_requirements = [
 
 dev_requirements = [
     "nbdev-mkdocs==0.6.1",
+    "nbdev==2.3.12",
+    "fastcore==1.7.20",
     "pytest==8.3.5",
     "pandas==2.2.3",
     "nbqa==1.9.1",
