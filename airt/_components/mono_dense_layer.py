@@ -3,7 +3,7 @@
 # %% auto 0
 __all__ = ['T', 'get_saturated_activation', 'get_activation_functions', 'apply_activations', 'get_monotonicity_indicator',
            'apply_monotonicity_indicator_to_kernel', 'replace_kernel_using_monotonicity_indicator', 'MonoDense',
-           'CDFHead']
+           'CDFHead', 'HyperParameters', 'HyperParametersRange', 'FraudEstimationModel']
 
 # %% ../../nbs/MonoDenseLayer.ipynb 3
 from contextlib import contextmanager
@@ -739,7 +739,7 @@ def _create_type_2(
 
     return y
 
-# %% ../../nbs/MonoDenseLayer.ipynb 52
+# %% ../../nbs/MonoDenseLayer.ipynb 53
 from keras.layers import Layer
 
 # Optimizacija CDFHead modula s novim izračunom gubitka mreže koristeći dinamički uzrokovane vremenske trenutke na razini grupe (batch) kao dinamičke granice diskretnih grupa. Ova metoda će dodatno ubrzati treniranje modela uz očuvanje točnosti modela kao i kod trenutne implementacije koja koristi gradijent CDF-a da bi izračunala PDF i vjerojatnosti danih događaja.
@@ -774,3 +774,90 @@ class CDFHead(Layer):
 
         """
         super(CDFHead, self).__init__(**kwargs)
+
+# %% ../../nbs/MonoDenseLayer.ipynb 54
+from tensorflow.data import Dataset
+from dataclasses import dataclass
+
+
+@export
+@dataclass
+class HyperParameters:
+    """Hyperparameters of a model"""
+
+    units: int
+    activation: str
+    n_layers: int
+    final_activation: str
+    dropout: Optional[float]
+
+
+@export
+@dataclass
+class HyperParametersRange:
+    """Hyperparameters ranges of a model"""
+
+    units: list[int]
+    activation: list[str]
+    n_layers: list[int]
+    final_activation: list[str]
+    dropout: list[Optional[float]]
+
+
+@export
+class FraudEstimationModel:
+    """Fraud Estimation Model
+
+    This is an implementation of the Fraud Estimation Model.
+    It uses monotonic dense blocks followed by the continuous distribution function (CDF) head to estimate the probability of fraud.
+    The model takes ranges of possible hyperparameters and the dataset as input and returns the best hyperparameters for the model.
+
+    Args:
+        data: dataset
+        hparam_range: hyperparameters range
+
+    """
+
+
+    def __init__(self, data: Dataset, hparam_range: HyperParametersRange) -> None:
+        """Fraud Estimation Model
+
+        This is an implementation of the Fraud Estimation Model.
+        It uses monotonic dense blocks followed by the continuous distribution function (CDF) head to estimate the probability of fraud.
+        The model takes ranges of possible hyperparameters and the dataset as input and returns the best hyperparameters for the model.
+
+        Args:
+            data: dataset
+            hparam_range: hyperparameters range
+
+        """
+        pass
+
+@export
+class RiskEstimationModel:
+    """Risk Estimation Model
+
+    This is an implementation of the Risk Estimation Model.
+    It uses monotonic dense blocks followed by the continuous distribution function (CDF) head to estimate the probability of events.
+    The model takes ranges of possible hyperparameters and the dataset as input and returns the best hyperparameters for the model.
+
+    Args:
+        data: dataset
+        hparam_range: hyperparameters range
+
+    """
+
+
+    def __init__(self, data: Dataset, hparam_range: HyperParametersRange) -> None:
+        """Fraud Estimation Model
+
+        This is an implementation of the Risk Estimation Model.
+        It uses monotonic dense blocks followed by the continuous distribution function (CDF) head to estimate the probability of events.
+        The model takes ranges of possible hyperparameters and the dataset as input and returns the best hyperparameters for the model.
+
+        Args:
+            data: dataset
+            hparam_range: hyperparameters range
+
+        """
+        pass
