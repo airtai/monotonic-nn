@@ -1,6 +1,7 @@
+from collections.abc import Generator
 from contextlib import contextmanager
 from functools import lru_cache
-from typing import *
+from typing import Any, Callable, Optional, TypeVar, Union
 
 import numpy as np
 import tensorflow as tf
@@ -8,7 +9,7 @@ from keras.layers import Concatenate, Dense, Dropout
 from numpy.typing import ArrayLike
 from tensorflow.python.types import TensorLike
 
-from .helpers import export
+from ...helpers import export
 
 __all__ = [
     "MonoDense",
@@ -50,7 +51,7 @@ def get_saturated_activation(
 @lru_cache
 def get_activation_functions(
     activation: Optional[Union[str, Callable[[TensorLike], TensorLike]]] = None,
-) -> Tuple[
+) -> tuple[
     Callable[[TensorLike], TensorLike],
     Callable[[TensorLike], TensorLike],
     Callable[[TensorLike], TensorLike],
@@ -79,7 +80,7 @@ def apply_activations(
     saturated_activation: Callable[[TensorLike], TensorLike],
     is_convex: bool = False,
     is_concave: bool = False,
-    activation_weights: Tuple[float, float, float] = (7.0, 7.0, 2.0),
+    activation_weights: tuple[float, float, float] = (7.0, 7.0, 2.0),
 ) -> TensorLike:
     if convex_activation is None:
         return x
@@ -117,7 +118,7 @@ def apply_activations(
 def get_monotonicity_indicator(
     monotonicity_indicator: ArrayLike,
     *,
-    input_shape: Tuple[int, ...],
+    input_shape: tuple[int, ...],
     units: int,
 ) -> TensorLike:
     # convert to tensor if needed and make it broadcastable to the kernel
@@ -212,7 +213,7 @@ class MonoDense(Dense):
         monotonicity_indicator: ArrayLike = 1,
         is_convex: bool = False,
         is_concave: bool = False,
-        activation_weights: Tuple[float, float, float] = (7.0, 7.0, 2.0),
+        activation_weights: tuple[float, float, float] = (7.0, 7.0, 2.0),
         **kwargs: Any,
     ):
         """Constructs a new MonoDense instance.
@@ -265,7 +266,7 @@ class MonoDense(Dense):
             self.saturated_activation,
         ) = get_activation_functions(self.org_activation)
 
-    def get_config(self) -> Dict[str, Any]:
+    def get_config(self) -> dict[str, Any]:
         """Get config is used for saving the model"""
         return dict(
             units=self.units,
@@ -276,7 +277,7 @@ class MonoDense(Dense):
             activation_weights=self.activation_weights,
         )
 
-    def build(self, input_shape: Tuple, *args: List[Any], **kwargs: Any) -> None:
+    def build(self, input_shape: tuple, *args: list[Any], **kwargs: Any) -> None:
         """Build
 
         Args:
@@ -323,7 +324,7 @@ class MonoDense(Dense):
     @classmethod
     def create_type_1(
         cls,
-        inputs: Union[TensorLike, Dict[str, TensorLike], List[TensorLike]],
+        inputs: Union[TensorLike, dict[str, TensorLike], list[TensorLike]],
         *,
         units: int,
         final_units: int,
@@ -332,9 +333,9 @@ class MonoDense(Dense):
         final_activation: Optional[
             Union[str, Callable[[TensorLike], TensorLike]]
         ] = None,
-        monotonicity_indicator: Union[int, Dict[str, int], List[int]] = 1,
-        is_convex: Union[bool, Dict[str, bool], List[bool]] = False,
-        is_concave: Union[bool, Dict[str, bool], List[bool]] = False,
+        monotonicity_indicator: Union[int, dict[str, int], list[int]] = 1,
+        is_convex: Union[bool, dict[str, bool], list[bool]] = False,
+        is_concave: Union[bool, dict[str, bool], list[bool]] = False,
         dropout: Optional[float] = None,
     ) -> TensorLike:
         r"""Builds Type-1 monotonic network
@@ -387,7 +388,7 @@ class MonoDense(Dense):
     @classmethod
     def create_type_2(
         cls,
-        inputs: Union[TensorLike, Dict[str, TensorLike], List[TensorLike]],
+        inputs: Union[TensorLike, dict[str, TensorLike], list[TensorLike]],
         *,
         input_units: Optional[int] = None,
         units: int,
@@ -397,9 +398,9 @@ class MonoDense(Dense):
         final_activation: Optional[
             Union[str, Callable[[TensorLike], TensorLike]]
         ] = None,
-        monotonicity_indicator: Union[int, Dict[str, int], List[int]] = 1,
-        is_convex: Union[bool, Dict[str, bool], List[bool]] = False,
-        is_concave: Union[bool, Dict[str, bool], List[bool]] = False,
+        monotonicity_indicator: Union[int, dict[str, int], list[int]] = 1,
+        is_convex: Union[bool, dict[str, bool], list[bool]] = False,
+        is_concave: Union[bool, dict[str, bool], list[bool]] = False,
         dropout: Optional[float] = None,
     ) -> TensorLike:
         r"""Builds Type-2 monotonic network
@@ -457,7 +458,7 @@ class MonoDense(Dense):
 # %% ../../nbs/MonoDenseLayer.ipynb 33
 def _create_mono_block(
     *,
-    units: List[int],
+    units: list[int],
     activation: Union[str, Callable[[TensorLike], TensorLike]],
     monotonicity_indicator: TensorLike = 1,
     is_convex: bool = False,
@@ -467,7 +468,7 @@ def _create_mono_block(
     def create_mono_block_inner(
         x: TensorLike,
         *,
-        units: List[int] = units,
+        units: list[int] = units,
         activation: Union[str, Callable[[TensorLike], TensorLike]] = activation,
         monotonicity_indicator: TensorLike = monotonicity_indicator,
         is_convex: bool = is_convex,
@@ -502,9 +503,9 @@ T = TypeVar("T")
 
 
 def _prepare_mono_input_n_param(
-    inputs: Union[TensorLike, Dict[str, TensorLike], List[TensorLike]],
-    param: Union[T, Dict[str, T], List[T]],
-) -> Tuple[List[TensorLike], List[T], List[str]]:
+    inputs: Union[TensorLike, dict[str, TensorLike], list[TensorLike]],
+    param: Union[T, dict[str, T], list[T]],
+) -> tuple[list[TensorLike], list[T], list[str]]:
     if isinstance(inputs, list):
         if isinstance(param, int):
             param = [param] * len(inputs)  # type: ignore
@@ -542,11 +543,11 @@ def _prepare_mono_input_n_param(
 
 # %% ../../nbs/MonoDenseLayer.ipynb 43
 def _check_convexity_params(
-    monotonicity_indicator: List[int],
-    is_convex: List[bool],
-    is_concave: List[bool],
-    names: List[str],
-) -> Tuple[bool, bool]:
+    monotonicity_indicator: list[int],
+    is_convex: list[bool],
+    is_concave: list[bool],
+    names: list[str],
+) -> tuple[bool, bool]:
     ix = [
         i for i in range(len(monotonicity_indicator)) if is_convex[i] and is_concave[i]
     ]
@@ -567,16 +568,16 @@ def _check_convexity_params(
 # %% ../../nbs/MonoDenseLayer.ipynb 46
 @export
 def _create_type_1(
-    inputs: Union[TensorLike, Dict[str, TensorLike], List[TensorLike]],
+    inputs: Union[TensorLike, dict[str, TensorLike], list[TensorLike]],
     *,
     units: int,
     final_units: int,
     activation: Union[str, Callable[[TensorLike], TensorLike]],
     n_layers: int,
     final_activation: Optional[Union[str, Callable[[TensorLike], TensorLike]]] = None,
-    monotonicity_indicator: Union[int, Dict[str, int], List[int]] = 1,
-    is_convex: Union[bool, Dict[str, bool], List[bool]] = False,
-    is_concave: Union[bool, Dict[str, bool], List[bool]] = False,
+    monotonicity_indicator: Union[int, dict[str, int], list[int]] = 1,
+    is_convex: Union[bool, dict[str, bool], list[bool]] = False,
+    is_concave: Union[bool, dict[str, bool], list[bool]] = False,
     dropout: Optional[float] = None,
 ) -> TensorLike:
     r"""Builds Type-1 monotonic network
@@ -642,7 +643,7 @@ def _create_type_1(
 # %% ../../nbs/MonoDenseLayer.ipynb 50
 @export
 def _create_type_2(
-    inputs: Union[TensorLike, Dict[str, TensorLike], List[TensorLike]],
+    inputs: Union[TensorLike, dict[str, TensorLike], list[TensorLike]],
     *,
     input_units: Optional[int] = None,
     units: int,
@@ -650,9 +651,9 @@ def _create_type_2(
     activation: Union[str, Callable[[TensorLike], TensorLike]],
     n_layers: int,
     final_activation: Optional[Union[str, Callable[[TensorLike], TensorLike]]] = None,
-    monotonicity_indicator: Union[int, Dict[str, int], List[int]] = 1,
-    is_convex: Union[bool, Dict[str, bool], List[bool]] = False,
-    is_concave: Union[bool, Dict[str, bool], List[bool]] = False,
+    monotonicity_indicator: Union[int, dict[str, int], list[int]] = 1,
+    is_convex: Union[bool, dict[str, bool], list[bool]] = False,
+    is_concave: Union[bool, dict[str, bool], list[bool]] = False,
     dropout: Optional[float] = None,
 ) -> TensorLike:
     r"""Builds Type-2 monotonic network
@@ -728,7 +729,7 @@ def _create_type_2(
     ]
 
     y = Concatenate(name="preprocessed_features")(y)
-    monotonicity_indicator_block: List[int] = sum(
+    monotonicity_indicator_block: list[int] = sum(
         [[abs(x)] * input_units for x in monotonicity_indicator], []
     )
 
