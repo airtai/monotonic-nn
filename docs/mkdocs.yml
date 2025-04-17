@@ -1,9 +1,9 @@
-site_name: Constrained Monotonic Neural Networks
+site_name: Monotonic Neural Networks
 # description to improve website indexing
 site_description: Constrained Monotonic Neural Networks.
 site_url: https://monotonic.airt.ai
 site_author: AIRT Technology, Inc.
-copyright: '&copy; 2025 <a href="https://monotonic.airt.ai" target="_blank" rel="noopener">AIRT Technologies, Inc.</a>'
+copyright: '&copy; 2025 <a href="https://airt.ai" target="_blank" rel="noopener">AIRT Technologies, Inc.</a>'
 
 docs_dir: docs
 
@@ -24,8 +24,8 @@ exclude_docs: |
 theme:
   name: material
   custom_dir: overrides
-  logo: assets/img/logo-white.svg
-  favicon: assets/img/favicon.svg
+  logo: assets/img/logo.svg
+  favicon: assets/img/logo.svg
   font:
     text: Roboto
   palette:
