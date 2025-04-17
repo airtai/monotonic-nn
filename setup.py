@@ -83,5 +83,3 @@ setuptools.setup(
         'nbdev': [f'{cfg.get("lib_path")}={cfg.get("lib_path")}._modidx:d']
     },
     **setup_cfg)
-
-
