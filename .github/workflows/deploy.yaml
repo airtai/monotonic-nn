@@ -1,11 +1,22 @@
-name: Deploy nbdev-mkdocs generated documentation to GitHub Pages
+name: Deploy docs to GitHub Pages
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: ["main"]
   workflow_dispatch:
+
+permissions:
+  contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: airtai/workflows/nbdev-mkdocs-ghp@main
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install docs deps
+        run: pip install --pre -e ".[docs]"
+      - name: Build and deploy
+        run: mkdocs gh-deploy --force --config-file mkdocs/mkdocs.yml

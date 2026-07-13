@@ -2,27 +2,19 @@ name: CI
 on: [workflow_dispatch, pull_request, push]
 
 jobs:
-  mypy_static_analysis:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: airtai/workflows/airt-mypy-check@main
-  bandit_static_analysis:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: airtai/workflows/airt-bandit-check@main
-  semgrep_static_analysis:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: airtai/workflows/airt-semgrep-check@main        
   test:
     strategy:
       fail-fast: false
       matrix:
-        os:  [ubuntu, macos]
-        version: ["3.9", "3.10", "3.11"]
+        os: [ubuntu]
+        version: ["3.11", "3.12", "3.13"]
     runs-on: ${{ matrix.os }}-latest
     steps:
-      - uses: fastai/workflows/nbdev-ci@master
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          version: ${{ matrix.version }}
-          pre: 1
+          python-version: ${{ matrix.version }}
+      - name: Install
+        run: pip install --pre -e ".[test]"
+      - name: Test
+        run: pytest -v

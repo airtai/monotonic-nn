@@ -11,9 +11,9 @@ __pycache__
 
 token
 
-# nbdev_mkdocs
-mkdocs/docs/
-mkdocs/site/
+# mkdocs build output / notebook execution cache
+/site/
+/.cache/
 
 CHANGELOG.bak
 
