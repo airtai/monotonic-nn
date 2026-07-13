@@ -1,0 +1,44 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "monotonic-nn"
+version = "0.4.0"
+description = "Monotonic Neural Networks — compatibility shim over mononet"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+authors = [{ name = "AIRT Technologies", email = "info@airt.ai" }]
+maintainers = [{ name = "Davor Runje", email = "davor@synthpop.ai" }]
+keywords = [
+    "tensorflow", "keras", "monotone", "monotonic neural networks", "dense layer",
+]
+classifiers = [
+    "Development Status :: 7 - Inactive",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Intended Audience :: Developers",
+    "Typing :: Typed",
+]
+dependencies = [
+    "mononet>=0.0.0a1",
+    "tensorflow>=2.16",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+docs = ["mkdocs-material>=9.5", "mkdocs-jupyter>=0.24"]
+
+[project.urls]
+Homepage = "https://github.com/airtai/monotonic-nn"
+"Modern implementation" = "https://github.com/davorrunje/mononet"
+
+[tool.hatch.build.targets.wheel]
+packages = ["airt"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
