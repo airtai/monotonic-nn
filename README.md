@@ -16,35 +16,93 @@ Constrained Monotonic Neural Networks
 
 ## Summary
 
-This Python library implements Constrained Monotonic Neural Networks as
+This package implements the Constrained Monotonic Neural Network construction
 described in:
 
 Davor Runje, Sharath M. Shankaranarayana, “Constrained Monotonic Neural
-Networks”, in Proceedings of the 40th International Conference on
-Machine Learning, 2023. \[[PDF](https://arxiv.org/pdf/2205.11775.pdf)\].
+Networks”, in Proceedings of the 40th International Conference on Machine
+Learning, 2023. \[[PDF](https://arxiv.org/pdf/2205.11775.pdf)\].
 
 #### Abstract
 
-Wider adoption of neural networks in many critical domains such as
-finance and healthcare is being hindered by the need to explain their
-predictions and to impose additional constraints on them. Monotonicity
-constraint is one of the most requested properties in real-world
-scenarios and is the focus of this paper. One of the oldest ways to
-construct a monotonic fully connected neural network is to constrain
-signs on its weights. Unfortunately, this construction does not work
-with popular non-saturated activation functions as it can only
+Wider adoption of neural networks in many critical domains such as finance and
+healthcare is being hindered by the need to explain their predictions and to
+impose additional constraints on them. Monotonicity constraint is one of the
+most requested properties in real-world scenarios and is the focus of this
+paper. One of the oldest ways to construct a monotonic fully connected neural
+network is to constrain signs on its weights. Unfortunately, this construction
+does not work with popular non-saturated activation functions as it can only
 approximate convex functions. We show this shortcoming can be fixed by
-constructing two additional activation functions from a typical
-unsaturated monotonic activation function and employing each of them on
-the part of neurons. Our experiments show this approach of building
-monotonic neural networks has better accuracy when compared to other
-state-of-the-art methods, while being the simplest one in the sense of
-having the least number of parameters, and not requiring any
-modifications to the learning procedure or post-learning steps. Finally,
-we prove it can approximate any continuous monotone function on a
+constructing two additional activation functions from a typical unsaturated
+monotonic activation function and employing each of them on the part of neurons.
+Our experiments show this approach of building monotonic neural networks has
+better accuracy when compared to other state-of-the-art methods, while being the
+simplest one in the sense of having the least number of parameters, and not
+requiring any modifications to the learning procedure or post-learning steps.
+Finally, we prove it can approximate any continuous monotone function on a
 compact subset of $\mathbb{R}^n$.
 
-#### Citation
+## Status: compatibility shim
+
+Since **v0.4.0a1**, this package no longer contains its own implementation. Its
+public API re-exports [`mononet.legacy`](https://github.com/davorrunje/mononet),
+the maintained multi-backend (PyTorch / JAX / Keras 3) implementation of the same
+construction. The re-exported objects are the very same ones from
+`mononet.legacy`, and behaviour is numerically identical to the original
+TensorFlow-Keras implementation (pinned by equivalence tests in `mononet`).
+
+The following continue to import, now backed by `mononet` and emitting a
+`DeprecationWarning`:
+
+- `airt.keras.layers.MonoDense`
+- `airt.keras.layers.MonoDense.create_type_1` / `create_type_2`
+- the helpers in `airt._components.mono_dense_layer`
+
+**New projects should depend on [`mononet`](https://github.com/davorrunje/mononet)
+directly.**
+
+## Requirements
+
+- Python **3.11+**
+- **Keras 3** — installed via `tensorflow>=2.16`
+
+## Install
+
+``` sh
+pip install --pre monotonic-nn
+```
+
+`--pre` is required while `monotonic-nn` and `mononet` are in alpha.
+
+## Usage (compatibility)
+
+Existing code keeps working unchanged; the imports resolve to `mononet.legacy`.
+The `monotonicity_indicator` uses the original three-value convention — `1` for
+increasingly monotonic inputs, `-1` for decreasingly monotonic, `0` for
+non-monotonic:
+
+``` python
+import keras
+from keras import Sequential
+from keras.layers import Input
+
+from airt.keras.layers import MonoDense  # re-exported from mononet.legacy
+
+model = Sequential(
+    [
+        Input(shape=(3,)),
+        MonoDense(128, activation="elu", monotonicity_indicator=[1, 0, -1]),
+        MonoDense(128, activation="elu"),
+        MonoDense(1),
+    ]
+)
+```
+
+For the `create_type_1` / `create_type_2` builders, benchmarks, the strictly
+multi-backend API, and current documentation, see the `mononet` docs:
+<https://davorrunje.github.io/mononet/>.
+
+## Citation
 
 If you use this library, please cite:
 
@@ -57,225 +115,12 @@ If you use this library, please cite:
 }
 ```
 
-## Python package
-
-This package contains an implementation of our Monotonic Dense Layer
-[`MonoDense`](https://monotonic.airt.ai/latest/api/airt/keras/layers/MonoDense/#airt.keras.layers.MonoDense)
-(Constrained Monotonic Fully Connected Layer). Below is the figure from
-the paper for reference.
-
-In the code, the variable `monotonicity_indicator` corresponds to **t**
-in the figure and parameters `is_convex`, `is_concave` and
-`activation_weights` are used to calculate the activation selector **s**
-as follows:
-
-- if `is_convex` or `is_concave` is **True**, then the activation
-  selector **s** will be (`units`, 0, 0) and (0, `units`, 0),
-  respecively.
-
-- if both `is_convex` or `is_concave` is **False**, then the
-  `activation_weights` represent ratios between $\breve{s}$, $\hat{s}$
-  and $\tilde{s}$, respecively. E.g. if `activation_weights = (2, 2, 1)`
-  and `units = 10`, then
-
-$$
-(\breve{s}, \hat{s}, \tilde{s}) = (4, 4, 2)
-$$
-
-![mono-dense-layer-diagram](https://github.com/airtai/monotonic-nn/raw/main/nbs/images/mono-dense-layer-diagram.png)
-
-### Install
-
-``` sh
-pip install monotonic-nn
-```
-
-### How to use
-
-In this example, we’ll assume we have a simple dataset with three inputs
-values $x_1$, $x_2$ and $x_3$ sampled from the normal distribution,
-while the output value $y$ is calculated according to the following
-formula before adding Gaussian noise to it:
-
-$y = x_1^3 + \sin\left(\frac{x_2}{2 \pi}\right) + e^{-x_3}$
-
-<table id="T_37b51">
-  <thead>
-    <tr>
-      <th id="T_37b51_level0_col0" class="col_heading level0 col0" >x0</th>
-      <th id="T_37b51_level0_col1" class="col_heading level0 col1" >x1</th>
-      <th id="T_37b51_level0_col2" class="col_heading level0 col2" >x2</th>
-      <th id="T_37b51_level0_col3" class="col_heading level0 col3" >y</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td id="T_37b51_row0_col0" class="data row0 col0" >0.304717</td>
-      <td id="T_37b51_row0_col1" class="data row0 col1" >-1.039984</td>
-      <td id="T_37b51_row0_col2" class="data row0 col2" >0.750451</td>
-      <td id="T_37b51_row0_col3" class="data row0 col3" >0.234541</td>
-    </tr>
-    <tr>
-      <td id="T_37b51_row1_col0" class="data row1 col0" >0.940565</td>
-      <td id="T_37b51_row1_col1" class="data row1 col1" >-1.951035</td>
-      <td id="T_37b51_row1_col2" class="data row1 col2" >-1.302180</td>
-      <td id="T_37b51_row1_col3" class="data row1 col3" >4.199094</td>
-    </tr>
-    <tr>
-      <td id="T_37b51_row2_col0" class="data row2 col0" >0.127840</td>
-      <td id="T_37b51_row2_col1" class="data row2 col1" >-0.316243</td>
-      <td id="T_37b51_row2_col2" class="data row2 col2" >-0.016801</td>
-      <td id="T_37b51_row2_col3" class="data row2 col3" >0.834086</td>
-    </tr>
-    <tr>
-      <td id="T_37b51_row3_col0" class="data row3 col0" >-0.853044</td>
-      <td id="T_37b51_row3_col1" class="data row3 col1" >0.879398</td>
-      <td id="T_37b51_row3_col2" class="data row3 col2" >0.777792</td>
-      <td id="T_37b51_row3_col3" class="data row3 col3" >-0.093359</td>
-    </tr>
-    <tr>
-      <td id="T_37b51_row4_col0" class="data row4 col0" >0.066031</td>
-      <td id="T_37b51_row4_col1" class="data row4 col1" >1.127241</td>
-      <td id="T_37b51_row4_col2" class="data row4 col2" >0.467509</td>
-      <td id="T_37b51_row4_col3" class="data row4 col3" >0.780875</td>
-    </tr>
-  </tbody>
-</table>
-
-Now, we’ll use the
-[`MonoDense`](https://monotonic.airt.ai/latest/api/airt/keras/layers/MonoDense/#airt.keras.layers.MonoDense)
-layer instead of `Dense` layer to build a simple monotonic network. By
-default, the
-[`MonoDense`](https://monotonic.airt.ai/latest/api/airt/keras/layers/MonoDense/#airt.keras.layers.MonoDense)
-layer assumes the output of the layer is monotonically increasing with
-all inputs. This assumtion is always true for all layers except possibly
-the first one. For the first layer, we use `monotonicity_indicator` to
-specify which input parameters are monotonic and to specify are they
-increasingly or decreasingly monotonic:
-
-- set 1 for increasingly monotonic parameter,
-
-- set -1 for decreasingly monotonic parameter, and
-
-- set 0 otherwise.
-
-In our case, the `monotonicity_indicator` is `[1, 0, -1]` because $y$
-is:
-
-- monotonically increasing w.r.t. $x_1$
-  $\left(\frac{\partial y}{x_1} = 3 {x_1}^2 \geq 0\right)$, and
-
-- monotonically decreasing w.r.t. $x_3$
-  $\left(\frac{\partial y}{x_3} = - e^{-x_2} \leq 0\right)$.
-
-``` python
-from tensorflow.keras import Sequential
-from tensorflow.keras.layers import Dense, Input
-
-from airt.keras.layers import MonoDense
-
-model = Sequential()
-
-model.add(Input(shape=(3,)))
-monotonicity_indicator = [1, 0, -1]
-model.add(
-    MonoDense(128, activation="elu", monotonicity_indicator=monotonicity_indicator)
-)
-model.add(MonoDense(128, activation="elu"))
-model.add(MonoDense(1))
-
-model.summary()
-```
-
-    Model: "sequential"
-    _________________________________________________________________
-     Layer (type)                Output Shape              Param #   
-    =================================================================
-     mono_dense (MonoDense)      (None, 128)               512       
-                                                                     
-     mono_dense_1 (MonoDense)    (None, 128)               16512     
-                                                                     
-     mono_dense_2 (MonoDense)    (None, 1)                 129       
-                                                                     
-    =================================================================
-    Total params: 17,153
-    Trainable params: 17,153
-    Non-trainable params: 0
-    _________________________________________________________________
-
-Now we can train the model as usual using `Model.fit`:
-
-``` python
-from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.optimizers.schedules import ExponentialDecay
-
-lr_schedule = ExponentialDecay(
-    initial_learning_rate=0.01,
-    decay_steps=10_000 // 32,
-    decay_rate=0.9,
-)
-optimizer = Adam(learning_rate=lr_schedule)
-model.compile(optimizer=optimizer, loss="mse")
-
-model.fit(
-    x=x_train, y=y_train, batch_size=32, validation_data=(x_val, y_val), epochs=10
-)
-```
-
-    Epoch 1/10
-    313/313 [==============================] - 3s 5ms/step - loss: 9.4221 - val_loss: 6.1277
-    Epoch 2/10
-    313/313 [==============================] - 1s 4ms/step - loss: 4.6001 - val_loss: 2.7813
-    Epoch 3/10
-    313/313 [==============================] - 1s 4ms/step - loss: 1.6221 - val_loss: 2.1111
-    Epoch 4/10
-    313/313 [==============================] - 1s 4ms/step - loss: 0.9479 - val_loss: 0.2976
-    Epoch 5/10
-    313/313 [==============================] - 1s 4ms/step - loss: 0.9008 - val_loss: 0.3240
-    Epoch 6/10
-    313/313 [==============================] - 1s 4ms/step - loss: 0.5027 - val_loss: 0.1455
-    Epoch 7/10
-    313/313 [==============================] - 1s 4ms/step - loss: 0.4360 - val_loss: 0.1144
-    Epoch 8/10
-    313/313 [==============================] - 1s 4ms/step - loss: 0.4993 - val_loss: 0.1211
-    Epoch 9/10
-    313/313 [==============================] - 1s 4ms/step - loss: 0.3162 - val_loss: 1.0021
-    Epoch 10/10
-    313/313 [==============================] - 1s 4ms/step - loss: 0.2640 - val_loss: 0.2522
-
-    <keras.callbacks.History>
-
 ## License
 
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This
-work is licensed under a
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative
-Commons Attribution-NonCommercial-ShareAlike 4.0 International
-License</a>.
+This package is licensed under the **Creative Commons
+Attribution-NonCommercial-ShareAlike 4.0 International License
+(CC BY-NC-SA 4.0)** — see [LICENSE](LICENSE).
 
-You are free to:
-
-- Share — copy and redistribute the material in any
-medium or format
-
-- Adapt — remix, transform, and build upon the material
-
-The licensor cannot revoke these freedoms as long as you follow the
-license terms.
-
-Under the following terms: 
-
-- Attribution — You must give appropriate
-credit, provide a link to the license, and indicate if changes were
-made. You may do so in any reasonable manner, but not in any way that
-suggests the licensor endorses you or your use.
-
-- NonCommercial — You may not use the material for commercial purposes.
-
-- ShareAlike — If you remix, transform, or build upon the material, you
-  must distribute your contributions under the same license as the
-  original.
-
-- No additional restrictions — You may not apply legal terms or
-  technological measures that legally restrict others from doing
-  anything the license permits.
+> The underlying implementation, [`mononet`](https://github.com/davorrunje/mononet),
+> is available under the **Apache License 2.0**, which permits commercial use.
+> If you need a permissive or commercial license, use `mononet` directly.
