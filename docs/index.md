@@ -16,6 +16,6 @@ The current documentation and the maintained paper-reproduction benchmarks live
 in the mononet docs:
 
 - Docs: <https://davorrunje.github.io/mononet/>
-- Benchmarks: <https://davorrunje.github.io/mononet/benchmarks/paper-reproduction/>
+- Benchmarks: <https://davorrunje.github.io/mononet/main/benchmarks/paper-reproduction/>
 
 The experiment notebooks in this site are **archived** for historical reference.

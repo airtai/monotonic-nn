@@ -99,7 +99,7 @@ carries those classmethods. Existing user code resolves unchanged.
   site still deploys to GitHub Pages.
 - Deprecation banner on every page.
 - Per-experiment notice linking to the corresponding mononet benchmark
-  (`https://davorrunje.github.io/mononet/benchmarks/paper-reproduction/…`):
+  (`https://davorrunje.github.io/mononet/main/benchmarks/paper-reproduction/…`):
   - `AutoMPG.ipynb` → `auto-mpg.html`
   - `Blog.ipynb` → `blog-feedback.html`
   - `Compas.ipynb` → `compas.html`
