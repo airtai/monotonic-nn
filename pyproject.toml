@@ -8,7 +8,7 @@ version = "0.4.0a1"
 description = "Monotonic Neural Networks — compatibility shim over mononet"
 readme = "README.md"
 requires-python = ">=3.11"
-license = "Apache-2.0"
+license = "CC-BY-NC-SA-4.0"
 authors = [{ name = "AIRT Technologies", email = "info@airt.ai" }]
 maintainers = [{ name = "Davor Runje", email = "davor@synthpop.ai" }]
 keywords = [
@@ -16,7 +16,7 @@ keywords = [
 ]
 classifiers = [
     "Development Status :: 7 - Inactive",
-    "License :: OSI Approved :: Apache Software License",
+    "License :: Free for non-commercial use",
     "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
