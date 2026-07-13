@@ -32,6 +32,16 @@ dependencies = [
 [project.optional-dependencies]
 test = ["pytest>=8"]
 docs = ["mkdocs-material>=9.5", "mkdocs-jupyter>=0.24"]
+# Legacy experiments/training utilities (airt.keras.experiments), kept as-is.
+# Best-effort under Keras 3 — see the experiments Keras-3 follow-up.
+experiments = [
+    "keras-tuner",
+    "matplotlib",
+    "pandas",
+    "pytest",
+    "seaborn",
+    "tqdm",
+]
 
 [project.urls]
 Homepage = "https://github.com/airtai/monotonic-nn"
