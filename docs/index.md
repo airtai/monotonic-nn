@@ -7,7 +7,7 @@
     imports keep working via `mononet.legacy`, but **new code should use
     `mononet` directly**.
 
-    As of v0.4.0 this package requires **Keras 3** (`tensorflow>=2.16`) and
+    As of v0.4.0a1 this package requires **Keras 3** (`tensorflow>=2.16`) and
     **Python 3.11+**.
 
 ## Documentation & benchmarks

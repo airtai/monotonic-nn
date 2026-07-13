@@ -2,7 +2,7 @@
 
 <!-- do not remove -->
 
-## 0.4.0
+## 0.4.0a1
 
 - **Reimplemented as a thin compatibility shim over
   [mononet](https://github.com/davorrunje/mononet).** `MonoDense`, the

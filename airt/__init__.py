@@ -9,6 +9,6 @@ use ``mononet`` directly.
 
 from pkgutil import extend_path
 
-__version__ = "0.4.0"
+__version__ = "0.4.0a1"
 __path__ = extend_path(__path__, __name__)
 __all__: list[str] = []

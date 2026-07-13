@@ -28,7 +28,7 @@ def test_component_module_reexports_full_surface() -> None:
         assert getattr(m, name) is getattr(legacy, name), name
 
 
-def test_version_is_040() -> None:
+def test_version_is_040a1() -> None:
     import airt
 
-    assert airt.__version__ == "0.4.0"
+    assert airt.__version__ == "0.4.0a1"
